@@ -1,0 +1,61 @@
+# Flutter Skills — Gap Analysis
+
+## What's Already Covered (10 skills)
+
+| Skill | Covers |
+|---|---|
+| `architecture` | Clean arch, layers, data models, tech stack, Dart 3 features, error handling |
+| `clean-code` | Dart guidelines, naming, anti-patterns, documentation, lifecycle |
+| `code-generation` | build_runner, Mappable, JSON serialization |
+| `design-system` | Tokens (colors, spacing, radius, typography), reusable components, theming, a11y |
+| `git-workflow` | Conventional commits, branching, PRs, labels |
+| `networking` | Dio, interceptors, retry, caching, repository pattern for HTTP |
+| `security` | AES-256, secure storage, Argon2id, biometric, clipboard, input validation, HTTPS |
+| `state-management` | BLoC, Injectable DI, GoRouter navigation, BLoC checklist |
+| `testing` | Unit/widget/integration tests, pyramid, mirror rule, mocktail, coverage |
+| `ui-and-design` | Slivers, performance, adaptive UI, breakpoints, animations, widget keys |
+
+---
+
+## What's Missing
+
+### 🔴 High Priority — Would Improve Daily Workflow
+
+| # | Gap | Why It Matters | Suggested Skill |
+|---|---|---|---|
+| 1 | **Localization (l10n/i18n)** | `context.l10n` referenced in clean-code and testing but NO rules on `.arb` file structure, plural forms, locale switching, `gen-l10n` config, or RTL support | `localization` |
+| 2 | **Local Storage & Database** | `isar` in tech stack but zero rules on database schema design, migrations, async reads, reactive queries, or offline-first patterns | `local-storage` |
+| 3 | **App Flavors & Environment** | No rules for dev/staging/prod configs, `--dart-define`, `.env` files, flavor-specific Firebase configs, or build variants | `app-config` |
+| 4 | **CI/CD & Release** | Testing mentions "CI/CD must pass" but no rules for GitHub Actions workflows, automated releases, versioning strategy, app store deployment, or code signing | `ci-cd` |
+
+### 🟡 Medium Priority — Useful for Scaling
+
+| # | Gap | Why It Matters | Suggested Skill |
+|---|---|---|---|
+| 5 | **Firebase Patterns** | Listed in tech stack but no rules for Auth flows, Firestore security rules, FCM push notifications, Crashlytics, Remote Config, or Analytics events | `firebase` |
+| 6 | **Forms & Validation** | No rules for form state management, field validation patterns, `TextFormField` best practices, input formatters, or form submission flows with BLoC | `forms` |
+| 7 | **Debugging & Profiling** | No rules for Flutter DevTools, performance profiling, memory leak detection, `debugPrint` strategies, or logging levels | `debugging` |
+
+### 🟢 Low Priority — Nice to Have
+
+| # | Gap | Why It Matters | Suggested Skill |
+|---|---|---|---|
+| 8 | **Platform Channels & Native** | No rules for MethodChannel, EventChannel, FFI, or platform-specific code (iOS/Android) | Could add to `architecture` |
+
+---
+
+## Recommendation
+
+The **top 4** (localization, local-storage, app-config, ci-cd) are the highest-impact additions because:
+
+- **Localization** — you already mandate `context.l10n` everywhere but have no rules governing HOW to structure it
+- **Local Storage** — isar is your DB but there's nothing on schema patterns, migrations, or offline sync
+- **App Config** — every real app needs flavors/environments, and without rules agents will hardcode configs
+- **CI/CD** — you mandate "tests must pass before PR" but don't define the pipeline
+
+The **medium 3** (Firebase, forms, debugging) are valuable as the app grows more complex.
+
+**Platform channels** can be folded into `architecture` as a section rather than a standalone skill.
+
+> [!TIP]
+> If you want to keep the skill count manageable, you could also merge `localization` into `clean-code` (since it's about code standards) and `app-config` into `architecture` (since it's about project structure). That would keep you at 12 skills instead of 14.

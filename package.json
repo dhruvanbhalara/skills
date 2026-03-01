@@ -1,0 +1,17 @@
+{
+  "name": "flutter-agent-skills-site",
+  "version": "1.0.0",
+  "description": "Premium documentation site for Flutter Agent Skills",
+  "main": "scripts/build_site.js",
+  "scripts": {
+    "build": "node scripts/build_site.js",
+    "dev": "node scripts/build_site.js --watch"
+  },
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.0.1",
+    "markdown-it-front-matter": "^0.2.3",
+    "yaml": "^2.4.5"
+  }
+}
