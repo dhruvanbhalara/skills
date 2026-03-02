@@ -13,6 +13,7 @@
 [local-storage](local-storage/SKILL.md)
 [localization](localization/SKILL.md)
 [networking](networking/SKILL.md)
+[pull-request](pull-request/SKILL.md)
 [security](security/SKILL.md)
 [state-management](state-management/SKILL.md)
 [testing](testing/SKILL.md)
