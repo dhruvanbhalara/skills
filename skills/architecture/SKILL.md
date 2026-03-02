@@ -104,3 +104,18 @@ Response → Repository (map to Domain Entity) → BLoC (emit Success/Error) →
 -   Use `Platform.isAndroid` / `Platform.isIOS` for runtime checks (import `dart:io`)
 -   For web, use `kIsWeb` from `package:flutter/foundation.dart`
 -   Prefer adaptive widgets (`Switch.adaptive`, `Slider.adaptive`) over manual platform checks where possible
+
+# Coding Guidelines & Maintenance
+
+-   **Conciseness**: Keep files < 300 lines and functions < 50 lines. Keep classes to < 10 public methods.
+-   **Strong Typing**: STRICTLY prohibit `dynamic`. Use `Object?` or explicit types.
+-   **Guard Clauses**: Use early returns (e.g., `if (user == null) return;`) to reduce nesting and improve readability.
+-   **Disposable Lifecycle**: `TextEditingController`, `ScrollController`, `FocusNode`, `StreamSubscription`, `AnimationController`, etc., MUST be `late` initialized in `initState()` and disposed in `dispose()`.
+-   **No Print Statements**: STRICTLY prohibit `print()`. Use `AppLogger` for all logging.
+-   **Reuse**: Extract widgets or code blocks used multiple times into `core/views/widgets` or utilities.
+
+# Documentation
+
+-   **Why, not What**: Comments MUST explain the rationale (intent), not what the code does.
+-   **Public API**: Document public classes and methods with triple-slash (`///`) comments.
+-   **History**: Do NOT include version history or "fixed by" comments. Git is the source of truth.
