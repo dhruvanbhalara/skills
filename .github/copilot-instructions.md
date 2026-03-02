@@ -46,4 +46,4 @@ As an AI agent working on this repository, you MUST adhere to the following core
 - **Secrets**: NEVER commit production secrets to Git.
 
 ---
-> Refer to specific files in `skills/` for detailed rules on Networking, UI/UX, Git, CI/CD, etc.
+> Refer to specific files inside `skills/flutter/`, `skills/dart/`, and `skills/github/` for detailed rules on Networking, UI/UX, Git, CI/CD, etc.

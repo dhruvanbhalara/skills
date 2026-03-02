@@ -1,6 +1,6 @@
 # Flutter Agent Skills Library
 
-A collection of 17 specialized coding agent skills for professional Flutter and Dart development. Optimized for **Claude Code**, **GitHub Copilot**, **Antigravity**, **Cursor**, and **OpenAI Codex**.
+A collection of 20 specialized coding agent skills for professional Flutter and Dart development. Optimized for **Claude Code**, **GitHub Copilot**, **Antigravity**, **Cursor**, and **OpenAI Codex**.
 
 🌐 **[View Live Documentation](https://dhruvanbhalara.github.io/skills/)**
 
@@ -13,13 +13,13 @@ These skills can be installed into your AI coding agent using the [skills.sh](ht
 # Install all skills
 npx skills add dhruvanbhalara/skills
 
-# Install a specific skill (e.g., architecture)
-npx skills add dhruvanbhalara/skills --skill architecture
+# Install a specific skill (e.g., flutter-architecture)
+npx skills add dhruvanbhalara/skills --skill flutter-architecture
 ```
 
 ## 📂 Available Skills
 
-We offer 16 specialized skills organized by feature and architectural layer. 
+We offer 20 specialized skills organized by platforms and tools (`flutter`, `dart`, and `github`). 
 
 **[View Full Skills List](skills/README.md)**
 
