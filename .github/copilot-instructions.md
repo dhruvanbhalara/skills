@@ -12,23 +12,28 @@ As an AI agent working on this repository, you MUST adhere to the following core
 ## Coding Standards
 - **Naming**: `PascalCase` for classes, `camelCase` for variables/functions, `snake_case` for files.
 - **Strong Typing**: NO `dynamic`. Use `Object?` or explicit types.
-- **Conciseness**: Keep files < 300 lines. Keep functions short.
+- **Conciseness**: Keep files < 300 lines. Keep functions short (< 50 lines).
 - **Null Safety**: Avoid `!` operator. Prefer pattern matching or early returns.
 - **Logging**: Use `AppLogger`. NEVER use `print()` or raw `debugPrint()`.
 
 ## Architecture & Data
 - **Repository Pattern**: DataSources handle raw IO (Dio, Isar, Firebase). Repositories handle orchestrating and domain mapping.
-- **Models**: Use `fromJson`/`toJson` factories. Data models live in `data/` and Domain entities live in `domain/`.
+- **Models**: Use `fromJson`/`toJson` factories. Data models live in `data/`, Domain entities in `domain/`, and UI states in `presentation/`.
 - **Forms**: Manage form state in BLoCs. Use pure validator functions in the domain layer.
 
-## UI & Design System
-- **Design Tokens**: ZERO hardcoded colors or spacing. Use `AppColors` and `AppSpacing`.
+## UI & UX (Design System)
+- **Design Tokens**: ZERO hardcoded colors or spacing. Use `AppColors`, `AppSpacing`, and `AppRadius`.
 - **Widget Lifecycle**: Declare controllers/nodes as `late final` in `initState()` and dispose in `dispose()`.
 - **Performance**: NO heavy work in `build()`. Mandate isolates for JSON parsing > 1MB.
-- **Anti-Patterns**: NO nested ScrollViews in the same direction. NO private `_buildWidget` methods (extract into classes instead).
+- **Patterns**: NO nested ScrollViews in same direction. NO private `_buildWidget` methods (extract into classes). Use Slivers for complex lists.
+
+## Git Workflow
+- **Atomic Commits**: One commit = one logical change. Follow Conventional Commits: `type(scope): description`.
+- **Commit Bodies**: Include sub-messages to explain the "why" and "how" of changes.
+- **Pull Requests**: Ensure zero analysis warnings and passing tests before PR. Provide descriptive titles and internal/external change summaries.
 
 ## Security
-- **Sensitive Data**: Use `flutter_secure_storage` for tokens and secrets. NEVER use `SharedPreferences` or source code for sensitive data.
+- **Sensitive Data**: Use `flutter_secure_storage` for tokens and secrets. NEVER use `SharedPreferences` or source code for secrets.
 - **Traffic**: All API communication MUST use HTTPS.
 
 ## Testing Strategy (100% Coverage)
@@ -41,4 +46,4 @@ As an AI agent working on this repository, you MUST adhere to the following core
 - **Secrets**: NEVER commit production secrets to Git.
 
 ---
-> Refer to specific files in `skills/` for detailed rules on Networking, Local Storage, CI/CD, etc.
+> Refer to specific files inside `skills/flutter/`, `skills/dart/`, and `skills/github/` for detailed rules on Networking, UI/UX, Git, CI/CD, etc.

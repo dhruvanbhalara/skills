@@ -15,9 +15,11 @@ const md = new MarkdownIt({
 
 const SKILLS_DIR = path.join(__dirname, '../skills');
 const OUTPUT_DIR = path.join(__dirname, '../_site');
+const SITE_URL = 'https://dhruvanbhalara.github.io/skills';
 
 // Helper to capitalize IDs
 function toTitleCase(str) {
+  if (!str) return '';
   return str
     .split('-')
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -44,18 +46,23 @@ function getBaseStyles() {
       --card-bg: oklch(0.95 0.01 260);
       --border: oklch(0.85 0.01 260);
       --nav-bg: oklch(1 0 0 / 0.8);
+      --badge-bg: oklch(0.9 0.02 260);
     }
-    
+
+    :root {
+      --badge-bg: oklch(0.22 0.02 260);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.15s, color 0.15s; }
-    body { 
-      background: var(--bg); 
-      color: var(--text); 
-      font-family: 'Outfit', -apple-system, sans-serif; 
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', -apple-system, sans-serif;
       line-height: 1.6;
       padding-top: 60px;
       -webkit-font-smoothing: antialiased;
     }
-    
+
     nav {
       position: fixed; top: 0; left: 0; width: 100%; height: 60px;
       background: var(--nav-bg);
@@ -72,42 +79,42 @@ function getBaseStyles() {
       justify-content: space-between;
       padding: 0 2rem;
     }
-    .logo { 
-      font-weight: 800; 
-      font-size: 1.1rem; 
-      color: var(--text); 
-      text-decoration: none; 
+    .logo {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
       letter-spacing: -0.5px;
       text-transform: uppercase;
     }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links a { color: var(--text); text-decoration: none; font-weight: 700; font-size: 0.8rem; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; }
     .nav-links a:hover { opacity: 1; }
-    
-    header { 
-      padding: 5rem 2rem 3rem; 
-      max-width: var(--max-width); 
-      margin: 0 auto; 
+
+    header {
+      padding: 5rem 2rem 3rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
       text-align: center;
     }
-    h1 { 
-      font-size: 2.5rem; 
-      line-height: 1; 
-      font-weight: 900; 
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1;
+      font-weight: 900;
       margin-bottom: 0.75rem;
       letter-spacing: -1.5px;
       text-transform: uppercase;
       color: var(--primary);
     }
-    .subtitle { 
-      font-size: 0.9rem; 
-      opacity: 0.5; 
+    .subtitle {
+      font-size: 0.9rem;
+      opacity: 0.5;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 2.5rem;
     }
-    
+
     .install-box {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -138,8 +145,8 @@ function getBaseStyles() {
     }
 
     main { max-width: var(--max-width); margin: 0 auto; padding: 2rem 0; }
-    
-    
+
+
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -147,7 +154,7 @@ function getBaseStyles() {
       max-width: var(--max-width);
       margin: 0 auto;
     }
-    
+
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -163,22 +170,68 @@ function getBaseStyles() {
     .card h3 { font-size: 1.05rem; margin-bottom: 1rem; color: var(--text); text-transform: uppercase; font-weight: 800; letter-spacing: -0.3px; }
     .card p { font-size: 0.9rem; opacity: 0.6; line-height: 1.6; margin-bottom: 2rem; flex-grow: 1; }
     .view-btn { font-size: 0.7rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 1px; }
-    
-    .theme-btn {
+
+    .theme-btn:hover { background: var(--border); }
+
+    /* Badges */
+    .badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+    .badge {
+      font-size: 0.6rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      background: var(--badge-bg);
+      color: var(--text);
+      opacity: 0.8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border);
+    }
+    .badge.platform { border-color: var(--primary); color: var(--primary); opacity: 1; }
+
+    /* Filters */
+    .filter-container {
+      max-width: var(--max-width);
+      margin: 0 auto 1.5rem;
+      padding: 0 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    .filter-btn {
       background: transparent;
       border: 1px solid var(--border);
-      width: 32px;
-      height: 32px;
+      padding: 0.5rem 1rem;
       border-radius: 8px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
       color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      cursor: pointer;
+      letter-spacing: 0.5px;
     }
-    .theme-btn:hover { background: var(--border); }
-    
+    .filter-btn:hover { background: var(--badge-bg); }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* Search Bar */
+    .search-container {
+      max-width: var(--max-width);
+      margin: 0 auto 2rem;
+      padding: 0 2rem;
+    }
+    #search-input {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+      outline: none;
+    }
+    #search-input:focus { border-color: var(--primary); }
+
     /* Markdown Styles */
     .markdown-body { max-width: var(--max-width); margin: 0 auto; padding-bottom: 6rem; }
     .markdown-body h1 { text-align: left; font-size: 1.5rem; color: var(--text); margin-top: 1.5rem; margin-bottom: 2rem; letter-spacing: -0.5px; text-transform: uppercase; line-height: 1.2; font-weight: 800; }
@@ -187,7 +240,7 @@ function getBaseStyles() {
     .markdown-body p { margin-bottom: 1.5rem; font-size: 1rem; opacity: 0.8; line-height: 1.75; }
     .markdown-body ul, .markdown-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
     .markdown-body li { margin-bottom: 0.75rem; opacity: 0.8; font-size: 0.95rem; }
-    
+
     .markdown-body pre {
       background: var(--code-bg) !important;
       padding: 1.75rem;
@@ -207,7 +260,7 @@ function getBaseStyles() {
       padding-top: 4rem;
       border-top: 1px solid var(--border);
     }
-    
+
     .copy-btn {
       position: absolute; top: 1rem; right: 1rem;
       background: rgba(255,255,255,0.05);
@@ -223,7 +276,7 @@ function getBaseStyles() {
       transition: opacity 0.2s;
     }
     pre:hover .copy-btn { opacity: 1; }
-    
+
     .breadcrumb {
       font-size: 0.7rem;
       font-weight: 800;
@@ -276,9 +329,9 @@ function getThemeScript() {
 
       window.addEventListener('DOMContentLoaded', () => {
         applyTheme(localStorage.getItem('theme') || 'dark');
-        
+
         if (typeof hljs !== 'undefined') hljs.highlightAll();
-        
+
         document.querySelectorAll('pre').forEach(block => {
           const button = document.createElement('button');
           button.className = 'copy-btn';
@@ -294,20 +347,75 @@ function getThemeScript() {
           });
           block.appendChild(button);
         });
+
+        // Filtering & Search Logic
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        let activePlatform = 'all';
+
+        function updateVisibility() {
+          const query = searchInput.value.toLowerCase();
+          const cards = document.querySelectorAll('.card');
+
+          cards.forEach(card => {
+            const title = card.getAttribute('data-title').toLowerCase();
+            const desc = card.getAttribute('data-desc').toLowerCase();
+            const platforms = card.getAttribute('data-platforms').toLowerCase();
+            const category = card.getAttribute('data-category').toLowerCase();
+
+            const matchesSearch = title.includes(query) || desc.includes(query) || platforms.includes(query) || category.includes(query);
+            const matchesPlatform = activePlatform === 'all' || platforms.includes(activePlatform);
+
+            if (matchesSearch && matchesPlatform) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+
+        if (searchInput) {
+          searchInput.addEventListener('input', updateVisibility);
+        }
+
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activePlatform = btn.getAttribute('data-platform');
+            updateVisibility();
+          });
+        });
       });
     })();
     `;
 }
 
+function getMetaTags(title, description, path = '') {
+  const url = `${SITE_URL}/${path}`;
+  return `
+    <meta name="description" content="${description}">
+    <meta property="og:title" content="${title}">
+    <meta property="og:description" content="${description}">
+    <meta property="og:url" content="${url}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+  `;
+}
+
 function generateIndexPage(skills) {
+  const title = "Agent Skills Library — The Directory for AI Agents";
+  const description = "Premium documentation library for professional Flutter and Dart AI agents. Built for Antigravity, Copilot, and Cursor.";
+
   const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Skills Library — The Directory for AI Agents</title>
+    <title>${title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    ${getMetaTags(title, description)}
     <style>${getBaseStyles()}</style>
     <script>${getThemeScript()}</script>
 </head>
@@ -317,7 +425,7 @@ function generateIndexPage(skills) {
             <a href="/" class="logo">Agent Skills</a>
             <div class="nav-links">
                 <button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button>
-                <a href="https://github.com/dhruvanbhalara/skills">GITHUB</a>
+                <a href="https://github.com/dhruvanbhalara/skills" target="_blank">GITHUB</a>
             </div>
         </div>
     </nav>
@@ -325,18 +433,37 @@ function generateIndexPage(skills) {
     <header>
         <h1>Agent Skills</h1>
         <div class="subtitle">by Dhruvan Bhalara</div>
-        
+
         <div class="install-box">
             <span>npx skills add dhruvanbhalara/skills</span>
             <button onclick="navigator.clipboard.writeText('npx skills add dhruvanbhalara/skills').then(() => { this.innerText = 'Copied!'; setTimeout(() => this.innerText = 'Copy', 2000); })">Copy</button>
         </div>
     </header>
 
-    <main>
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Search skills (e.g., 'optimization', 'bloc', 'git')...">
+    </div>
 
+    <div class="filter-container">
+        <button class="filter-btn active" data-platform="all">All Platforms</button>
+        <button class="filter-btn" data-platform="flutter">Flutter</button>
+        <button class="filter-btn" data-platform="android">Android</button>
+        <button class="filter-btn" data-platform="ios">iOS</button>
+        <button class="filter-btn" data-platform="cross-platform">Cross-Platform</button>
+    </div>
+
+    <main>
         <div class="card-grid">
             ${skills.map(skill => `
-                <a href="${skill.id}.html" class="card">
+                <a href="${skill.id}.html" class="card"
+                   data-title="${skill.title}"
+                   data-desc="${skill.description}"
+                   data-platforms="${(skill.platforms || []).join(',')}"
+                   data-category="${skill.category || ''}">
+                    <div class="badges">
+                        ${(skill.platforms || []).map(p => `<span class="badge platform">${p}</span>`).join('')}
+                        <span class="badge">${skill.category || 'general'}</span>
+                    </div>
                     <h3>${skill.title}</h3>
                     <p>${skill.description}</p>
                     <div class="view-btn">View Skill &rarr;</div>
@@ -356,19 +483,23 @@ function generateIndexPage(skills) {
 
 function generateSkillPage(skill, htmlContent) {
   const installCmd = `npx skills add dhruvanbhalara/skills --skill ${skill.id}`;
+  const title = `${skill.title} | Agent Skills`;
+
   const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${skill.title} | Agent Skills</title>
+    <title>${title}</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    ${getMetaTags(title, skill.description, `${skill.id}.html`)}
     <style>${getBaseStyles()}</style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/dart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
     <script>${getThemeScript()}</script>
 </head>
 <body>
@@ -377,7 +508,7 @@ function generateSkillPage(skill, htmlContent) {
             <a href="/" class="logo">Agent Skills</a>
             <div class="nav-links">
                 <button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button>
-                <a href="https://github.com/dhruvanbhalara/skills">GITHUB</a>
+                <a href="https://github.com/dhruvanbhalara/skills" target="_blank">GITHUB</a>
             </div>
         </div>
     </nav>
@@ -386,7 +517,12 @@ function generateSkillPage(skill, htmlContent) {
         <div class="breadcrumb">
             <a href="/">Library</a> / ${skill.title}
         </div>
-        
+
+        <div style="margin-bottom: 2rem; display: flex; gap: 0.5rem;">
+            ${(skill.platforms || []).map(p => `<span class="badge platform">${p}</span>`).join('')}
+            ${(skill.languages || []).map(l => `<span class="badge">${l}</span>`).join('')}
+        </div>
+
         <div class="install-box">
             <span>${installCmd}</span>
             <button onclick="navigator.clipboard.writeText('${installCmd}').then(() => { this.innerText = 'Copied!'; setTimeout(() => this.innerText = 'Copy', 2000); })">Copy</button>
@@ -408,18 +544,29 @@ function generateSkillPage(skill, htmlContent) {
   return html;
 }
 
+async function walkDir(dir, fileList = []) {
+  const files = await fs.readdir(dir, { withFileTypes: true });
+  for (const file of files) {
+    const filePath = path.join(dir, file.name);
+    if (file.isDirectory()) {
+      await walkDir(filePath, fileList);
+    } else if (file.name === 'SKILL.md') {
+      fileList.push(filePath);
+    }
+  }
+  return fileList;
+}
+
 async function build() {
   try {
     await fs.ensureDir(OUTPUT_DIR);
     await fs.emptyDir(OUTPUT_DIR);
 
     const skills = [];
-    const skillFolders = (await fs.readdir(SKILLS_DIR, { withFileTypes: true }))
-      .filter(dirent => dirent.isDirectory());
+    const skillFiles = await walkDir(SKILLS_DIR);
 
-    for (const folder of skillFolders) {
-      const skillPath = path.join(SKILLS_DIR, folder.name, 'SKILL.md');
-      if (!(await fs.pathExists(skillPath))) continue;
+    for (const skillPath of skillFiles) {
+      const folderName = path.basename(path.dirname(skillPath));
 
       let frontmatter = {};
       const fullContent = await fs.readFile(skillPath, 'utf8');
@@ -429,18 +576,53 @@ async function build() {
       const cleanContent = fullContent.replace(/^---\n[\s\S]*?\n---/, '');
       const htmlContent = md.render(cleanContent);
 
+      const metadata = frontmatter.metadata || {};
+      let platforms = [];
+      if (metadata.platforms) {
+        platforms = metadata.platforms.split(',').map(p => p.trim());
+      }
+
+      let languages = [];
+      if (metadata.languages) {
+        languages = metadata.languages.split(',').map(l => l.trim());
+      }
+
       const skillData = {
-        id: folder.name,
-        title: (frontmatter.name || folder.name).toUpperCase(),
+        id: folderName,
+        title: (frontmatter.name || folderName).toUpperCase(),
         description: frontmatter.description || '',
+        platforms: platforms.length > 0 ? platforms : ['flutter'],
+        languages: languages.length > 0 ? languages : ['dart'],
+        category: metadata.category || 'general',
         htmlContent
       };
 
       skills.push(skillData);
-      await fs.writeFile(path.join(OUTPUT_DIR, `${folder.name}.html`), generateSkillPage(skillData, htmlContent));
+      await fs.writeFile(path.join(OUTPUT_DIR, `${folderName}.html`), generateSkillPage(skillData, htmlContent));
     }
 
-    await fs.writeFile(path.join(OUTPUT_DIR, 'index.html'), generateIndexPage(skills.sort((a, b) => a.title.localeCompare(b.title))));
+    // Generate Index
+    const sortedSkills = skills.sort((a, b) => a.title.localeCompare(b.title));
+    await fs.writeFile(path.join(OUTPUT_DIR, 'index.html'), generateIndexPage(sortedSkills));
+
+    // Generate Sitemap
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>${SITE_URL}/</loc></url>
+    ${skills.map(s => `<url><loc>${SITE_URL}/${s.id}.html</loc></url>`).join('\n    ')}
+</urlset>`;
+    await fs.writeFile(path.join(OUTPUT_DIR, 'sitemap.xml'), sitemap);
+
+    // Generate search.json
+    await fs.writeJson(path.join(OUTPUT_DIR, 'search.json'), skills.map(s => ({
+      id: s.id,
+      title: s.title,
+      description: s.description,
+      platforms: s.platforms,
+      category: s.category
+    })));
+
+    console.log(`✅ Build successful! Generated ${skills.length} skill pages.`);
   } catch (err) {
     console.error('❌ Build failed:', err);
   }
