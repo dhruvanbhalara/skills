@@ -12,7 +12,13 @@ This skill automates the process of creating high-quality Pull Requests using th
 - **Commits Check**: Ensure all changes are committed in the current feature branch.
 - **Base Branch**: Identify the target base branch (usually `main`).
 
-## 2. Generate PR Title
+## 2. PR Quality & Metadata
+- **Quality Gate**: All PRs MUST pass analysis (0 warnings), formatting, and tests before merge.
+- **Branch Protection**: Ensure branch protection rules are respected (no direct pushes to `main`).
+- **Metadata**: ALWAYS specify relevant labels and at least one assignee.
+- **Checklist**: Ensure the development plan and requirements are reviewed before completing the task.
+
+## 3. Generate PR Title
 - **Conventional Commits**: The PR title MUST follow the pattern: `<type>(<scope>): <description>`.
     - Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
     - Example: `feat(auth): add google sign-in support`
