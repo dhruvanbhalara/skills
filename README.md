@@ -19,7 +19,7 @@ npx skills add dhruvanbhalara/skills --skill flutter-architecture
 
 ## 📂 Available Skills
 
-We offer 20 specialized skills organized by platforms and tools (`flutter`, `dart`, and `github`). 
+We offer 20 specialized skills organized by platforms and tools (`flutter`, `dart`, and `github`).
 
 **[View Full Skills List](skills/README.md)**
 
@@ -32,4 +32,4 @@ For agents that support global project-level guidance (like GitHub Copilot or Co
 - `AGENTS.md`
 
 ## 📄 License
-This library is licensed under the MIT License.
+This library is licensed under the [MIT License](LICENSE).
