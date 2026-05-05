@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: CI/CD Pipelines, Versioning & Release Management
+description: Orchestrate CI/CD pipelines with GitHub Actions for Flutter apps. Use when setting up quality gates, automated builds, semantic versioning, code signing, or deployment workflows.
 metadata:
     platforms: "cross-platform"
     languages: "generic"

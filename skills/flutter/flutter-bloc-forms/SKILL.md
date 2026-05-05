@@ -1,6 +1,6 @@
 ---
 name: flutter-bloc-forms
-description: Form State Management, Validation & Input Patterns
+description: Manage form state, validation, and input handling through dedicated FormBlocs. Use when building forms with real-time validation, multi-step flows, or complex input patterns like search debouncing.
 metadata:
     platforms: "flutter"
     languages: "dart"

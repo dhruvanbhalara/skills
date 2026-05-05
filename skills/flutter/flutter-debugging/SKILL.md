@@ -1,6 +1,6 @@
 ---
 name: flutter-debugging
-description: Flutter DevTools, Profiling, Logging & Memory Management
+description: Debug and profile Flutter applications using DevTools, structured logging, and memory analysis. Use when diagnosing layout issues, tracking performance bottlenecks, or setting up centralized error reporting with Crashlytics.
 metadata:
     platforms: "flutter"
     languages: "dart"

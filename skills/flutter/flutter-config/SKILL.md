@@ -1,6 +1,6 @@
 ---
 name: flutter-config
-description: App Flavors, Environment Config & Build Variants
+description: Configure app flavors (dev, staging, prod) with environment-specific settings via dart-define-from-file. Use when setting up build variants, per-flavor Firebase projects, or platform-specific configuration.
 metadata:
     platforms: "flutter"
     languages: "dart"

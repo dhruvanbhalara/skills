@@ -1,6 +1,6 @@
 ---
 name: dart-tooling
-description: Workflows for Dart tooling including static analysis, package dependency resolution, and migrating tests to package:checks.
+description: Run Dart tooling workflows for static analysis, dependency conflict resolution, and test migration to package:checks. Use when fixing analyzer errors, resolving pub dependency conflicts, or modernizing test assertions.
 metadata:
     platforms: "dart"
     languages: "dart"

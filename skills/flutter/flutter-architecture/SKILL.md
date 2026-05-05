@@ -1,6 +1,6 @@
 ---
 name: flutter-architecture
-description: Clean Architecture, Data Models, Tech Stack, Error Handling & Platform Channels
+description: Enforce Clean Architecture with BLoC pattern for Flutter applications. Use when scaffolding features, structuring data/domain/presentation layers, defining data models, or integrating native platform channels.
 metadata:
     platforms: "flutter"
     languages: "dart"

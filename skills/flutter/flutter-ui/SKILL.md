@@ -1,6 +1,6 @@
 ---
 name: flutter-ui
-description: UI Performance, Design Tokens, Reusable Components & Adaptive Design
+description: Build performant, accessible UIs with strict design tokens and reusable widget patterns. Use when implementing layouts, responsive breakpoints, theming, widget extraction, or fixing common rendering issues like overflow errors.
 metadata:
     platforms: "flutter"
     languages: "dart"

@@ -1,6 +1,6 @@
 ---
 name: dart-logic-patterns
-description: Best practices for implementing efficient business logic on mobile using appropriate algorithms and data structures.
+description: Apply efficient algorithms, data structures, and Dart 3 pattern matching for clean business logic. Use when implementing search, sorting, debouncing, memoization, or exhaustive control flow in domain layers.
 metadata:
     platforms: "dart"
     languages: "dart"

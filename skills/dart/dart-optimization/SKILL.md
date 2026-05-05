@@ -1,6 +1,6 @@
 ---
 name: dart-optimization
-description: Master Dart/Flutter performance optimization, efficient code patterns, error handling, and type safety.
+description: Optimize Dart code for performance, type safety, and runtime error prevention. Use when profiling hot paths, enforcing sound typing, handling null safety, or debugging type mismatches and runtime failures.
 metadata:
     platforms: "dart"
     languages: "dart"
