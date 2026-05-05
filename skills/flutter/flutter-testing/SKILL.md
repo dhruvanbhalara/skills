@@ -1,6 +1,6 @@
 ---
 name: flutter-testing
-description: Quality Assurance & Advanced Testing
+description: Write comprehensive widget and integration tests using pattern-based testing (Golden Variants, State Matrix, Interaction Contracts). Use when testing UI components, user interaction flows, or running end-to-end integration tests.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -15,21 +15,43 @@ metadata:
 -   **Coverage Targets**: Target 100% logic coverage for `domain` and `bloc` layers.
 -   **Test Independence**: Each test MUST be independent. No shared mutable state between tests.
 
-# Unit Testing
-
--   Follow the Arrange-Act-Assert (Given-When-Then) convention for clear and maintainable tests
--   Use mocks for dependencies except for lightweight third-party services
--   Test business logic in isolation from the UI
--   For tests, ensure to create 5 to 8 tests for logical operations with real scenarios
--   **Mocking Protocol**: Use `mocktail` for all dependency mocking. STRICTLY prohibit using real implementation dependencies in unit tests.
--   **Pure Logic**: Business logic inside BLoCs or UseCases should be extracted to static pure functions for 100% unit test coverage.
-
 # Widget Testing
 
--   Write widget tests for all major UI components
--   Test user interactions and state changes
--   **Widget Keys**: Use `Key('feature_action_id')` format on interactive widgets for test access
--   **Test Localization**: Use `AppLocalizations` (`context.l10n`) in widget tests — no hardcoded strings
+-   Write widget tests for all major UI components.
+-   Test user interactions and state changes.
+-   **Widget Keys**: Use `Key('feature_action_id')` format on interactive widgets for test access.
+-   **Test Localization**: Use `AppLocalizations` (`context.l10n`) in widget tests — no hardcoded strings.
+
+# Pattern-Based Testing
+
+Adopt these three structural patterns to eliminate boilerplate, enforce complete coverage, and ensure consistency across the test suite. These are conventions — no external package dependency is required.
+
+## Golden Variant Testing
+When a widget has multiple visual states (primary, disabled, hover, error), test all variants in a single structured `group()` with a `Map<String, Widget Function()>`:
+-   Define a `variants` map where keys are state names and values are widget builders.
+-   Each variant MUST be rendered in isolation (fresh `pumpWidget` call per variant).
+-   Use deterministic golden file naming: `goldens/<component>.<variant>.png`.
+-   Set a consistent `surfaceSize` via `tester.view.physicalSize` to avoid flaky pixel diffs.
+-   **When to use**: Design system components, widgets with distinct modes/types.
+-   **When NOT to use**: Integration tests or animation frame verification.
+
+## State Matrix Testing
+Every stateful widget MUST be tested against ALL possible UI states. Use a state matrix to separate setup from verification:
+-   Define a `states` map with every state the widget can render (`loading`, `error`, `data`, `empty`).
+-   Write a single `verify(stateName)` callback that asserts correct rendering per state using `switch` expressions.
+-   This pattern prevents the common mistake of only testing the "happy path".
+-   **When to use**: Widgets with complex state machines (e.g., BLoC-driven screens).
+-   **When NOT to use**: If verification logic varies wildly between states, write separate tests.
+
+## Interaction Contract Testing
+Reusable widgets have implicit behavioral rules. Define these as explicit, reusable contracts:
+-   Create helper functions in `test/utils/` for common contracts:
+    -   `verifyTappable(tester, finder, mockCallback)` — Tap fires callback exactly once.
+    -   `verifyDisabledNotTappable(tester, finder, mockCallback)` — Tap does NOT fire callback when disabled.
+    -   `verifyValidatesOnBlur(tester, finder)` — Validation triggers when focus leaves.
+-   Apply contracts consistently across all widgets sharing the same behavior.
+-   **When to use**: Widgets with strictly defined behavioral rules that must hold across refactors.
+-   **When NOT to use**: One-off logic unique to a single widget.
 
 # Integration Testing
 
@@ -49,6 +71,16 @@ metadata:
 -   `A RenderFlex overflowed...` — Wrap widget in `Expanded` or constrain dimensions in test
 -   `Vertical viewport was given unbounded height` — Wrap `ListView` in `SizedBox` with fixed height in test
 -   `setState called during build` — Defer state changes to post-frame callback
+
+## Workflow: Testing Execution
+
+Follow this sequential workflow when testing a feature. Copy the checklist to track progress.
+
+### Task Progress
+- [ ] **Step 1: Write Widget Tests.** Ensure all interactive UI elements have `Key`s. Apply Golden Variant, State Matrix, or Interaction Contract patterns as appropriate.
+- [ ] **Step 2: Write Integration Tests.** Create end-to-end user flows using `IntegrationTestWidgetsFlutterBinding`.
+- [ ] **Step 3: Check Coverage.** Run `flutter test --coverage` and verify targets are met.
+- [ ] **Step 4: Run Static Analysis.** Execute `dart analyze` to ensure code conforms to linting rules.
 
 # Running Tests
 
