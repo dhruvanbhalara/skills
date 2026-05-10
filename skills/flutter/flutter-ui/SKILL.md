@@ -1,6 +1,6 @@
 ---
 name: flutter-ui
-description: UI Performance, Design Tokens, Reusable Components & Adaptive Design
+description: Build performant, accessible UIs with strict design tokens and reusable widget patterns. Use when implementing layouts, responsive breakpoints, theming, widget extraction, or fixing common rendering issues like overflow errors.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -38,11 +38,15 @@ Use `AppColors`, `AppSpacing`, `AppRadius`, and `AppTypography`. NEVER hardcode 
 -   **Scroll Padding**: Add dynamic bottom padding when a FAB or BottomBar is present to prevent overlap.
 -   **Sheets vs Screens**: Prefer full `Scaffold` screens over `ModalBottomSheet` for complex forms.
 
-# 5. Adaptive & Responsive Design
+# 5. Adaptive & Responsive Design and Common Fixes
 
--   **Mobile First**: Design for mobile, then adapt for tablet (`600-840`) and desktop (`>840`).
--   **Measure & Branch**: Use `MediaQuery.sizeOf(context)` for layout decisions; `LayoutBuilder` for widget constraints.
--   **Rules**: Never lock orientation. Support keyboard navigation and hover effects.
+-   **Mobile First**: Design for mobile, then adapt for tablet (`600-840dp`) and desktop (`>840dp`). Use `MediaQuery.sizeOf(context).width`.
+-   **Layout Builder**: Use `LayoutBuilder` when widget rendering depends on the immediate parent's constraints, not the whole screen.
+-   **Safe Area**: Always wrap main layouts in `SafeArea` to avoid device notches and system UI.
+-   **Overflow Fixes**:
+    -   `A RenderFlex overflowed...`: Typically means a widget is demanding more space than available in a `Row` or `Column`. Wrap the offending widget in `Expanded` or `Flexible`.
+    -   `Vertical viewport was given unbounded height`: Often happens when nesting scrollable views (like `ListView` inside `Column`). Use `Expanded` on the `ListView` or set `shrinkWrap: true`.
+-   **Rules**: Never lock orientation unless strictly required by a unique feature. Support keyboard navigation and hover effects for desktop users.
 
 # 6. UI States & Accessibility
 

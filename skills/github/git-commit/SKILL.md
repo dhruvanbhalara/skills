@@ -1,6 +1,6 @@
 ---
 name: git-commit
-description: Automated Git Commits
+description: Create atomic, well-structured Git commits following Conventional Commits. Use when committing changes to ensure consistent commit messages with proper scoping and detailed bodies.
 metadata:
     platforms: "cross-platform"
     languages: "generic"

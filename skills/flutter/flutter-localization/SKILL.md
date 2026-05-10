@@ -1,6 +1,6 @@
 ---
 name: flutter-localization
-description: Internationalization, ARB Files & Locale Management
+description: Implement internationalization using Flutter's built-in l10n with ARB files and ICU message syntax. Use when adding multi-language support, managing translations, handling plurals/gender forms, or supporting RTL layouts.
 metadata:
     platforms: "flutter"
     languages: "dart"

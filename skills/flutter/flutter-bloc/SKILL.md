@@ -1,6 +1,6 @@
 ---
 name: flutter-bloc
-description: State Management, Dependency Injection & Navigation
+description: Implement state management using the BLoC/Cubit pattern with injectable dependency injection. Use when creating new BLoCs, managing UI state transitions, or configuring navigation with GoRouter.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -45,14 +45,17 @@ metadata:
 -   `context.read<Bloc>().add(Event())` for dispatching events
 -   `context.watch<Bloc>().state` for reactive rebuilds (inside `build()` only)
 
-## BLoC Submission Checklist
+## Workflow: Implementing State Management
 
-- [ ] Events and States use `Equatable` with correct `props`
-- [ ] All async operations follow `Loading → Success/Error` pattern
-- [ ] No business logic in UI widgets
-- [ ] No SDK/API calls outside DataSources
-- [ ] Zero hardcoded colors, spacing, or typography \u2014 use design tokens (`AppColors`, `AppSpacing`)
-- [ ] Code formatted with `dart format`
+Follow this sequential workflow when adding or updating a BLoC. Copy the checklist to track progress.
+
+### Task Progress
+- [ ] **Step 1: Define Events and States.** Ensure they use `Equatable` with correct `props` or `freezed`.
+- [ ] **Step 2: Implement Async Operations.** Verify that all async work follows the `Loading → Success/Error` pattern.
+- [ ] **Step 3: Refactor UI.** Ensure there is no orchestration or business logic in UI widgets; they must only dispatch events.
+- [ ] **Step 4: Verify Data Sources.** Ensure no SDK/API calls exist outside DataSources.
+- [ ] **Step 5: Review Design Tokens.** Ensure zero hardcoded colors, spacing, or typography are used.
+- [ ] **Step 6: Format Code.** Ensure the code is formatted with `dart format`.
 
 # Dependency Injection
 

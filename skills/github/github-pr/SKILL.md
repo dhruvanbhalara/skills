@@ -1,6 +1,6 @@
 ---
 name: github-pr
-description: Pull Request Creation & Management
+description: Automate Pull Request creation with proper titles, descriptions, labels, and quality checks using the GitHub CLI. Use when preparing code for review and merge.
 metadata:
     platforms: "cross-platform"
     languages: "generic"

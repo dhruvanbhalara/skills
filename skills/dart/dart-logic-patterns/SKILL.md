@@ -1,9 +1,9 @@
 ---
 name: dart-logic-patterns
-description: Best practices for implementing efficient business logic on mobile using appropriate algorithms and data structures.
+description: Apply efficient algorithms, data structures, and Dart 3 pattern matching for clean business logic. Use when implementing search, sorting, debouncing, memoization, or exhaustive control flow in domain layers.
 metadata:
-    platforms: "cross-platform"
-    languages: "generic"
+    platforms: "dart"
+    languages: "dart"
     category: "logic"
 ---
 
@@ -23,6 +23,7 @@ The efficiency of your business logic directly impacts battery life and responsi
 - **Debouncing**: Delay execution until a user stops interacting (e.g., search-as-you-type).
 - **Throttling**: Limit execution to at most once every interval (e.g., scrolling events).
 - **Memoization**: Cache the results of expensive pure functions based on their arguments. Use `package:memoize` or custom implementations.
+- **Pattern Matching (Dart 3+)**: Use switch expressions and exhaustive pattern matching for control flow instead of deeply nested if-else chains. This is a core part of clean Dart logic.
 
 ## Search & Sort
 - **Binary Search**: Use for sorted lists to transform O(n) searches into O(log n).
