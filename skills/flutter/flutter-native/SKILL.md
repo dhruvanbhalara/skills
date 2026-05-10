@@ -1,6 +1,6 @@
 ---
 name: flutter-native
-description: Best practices for MethodChannels, EventChannels, and Federated Plugins.
+description: Build type-safe native platform integrations using MethodChannels, EventChannels, and Pigeon. Use when communicating with Android/iOS native code, implementing federated plugins, or bridging platform-specific APIs.
 metadata:
     platforms: "flutter, android, ios"
     languages: "dart, kotlin, swift"

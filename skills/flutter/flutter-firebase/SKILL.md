@@ -1,6 +1,6 @@
 ---
 name: flutter-firebase
-description: Firebase Auth, Firestore, FCM, Crashlytics & Analytics Patterns
+description: Integrate Firebase services including Authentication, Firestore, Cloud Messaging, Crashlytics, and Analytics. Use when adding backend capabilities, push notifications, crash reporting, or remote configuration to a Flutter app.
 metadata:
     platforms: "flutter, android, ios"
     languages: "dart"

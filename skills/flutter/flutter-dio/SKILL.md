@@ -1,6 +1,6 @@
 ---
 name: flutter-dio
-description: HTTP Networking with Dio, Retry & Caching Patterns
+description: Implement HTTP networking with Dio including interceptors, retry logic, and response caching. Use when building API clients, configuring authentication headers, or handling network errors gracefully.
 metadata:
     platforms: "flutter"
     languages: "dart"

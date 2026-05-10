@@ -1,6 +1,6 @@
 ---
 name: flutter-isar
-description: Isar Database, Caching & Offline-First Patterns
+description: Implement local data persistence with Isar database and offline-first architecture. Use when building cache-first data strategies, reactive queries, schema migrations, or secure local storage with flutter_secure_storage.
 metadata:
     platforms: "flutter"
     languages: "dart"

@@ -1,6 +1,6 @@
 ---
 name: flutter-architecture
-description: Clean Architecture, Data Models, Tech Stack, Error Handling & Platform Channels
+description: Enforce Clean Architecture with BLoC pattern for Flutter applications. Use when scaffolding features, structuring data/domain/presentation layers, defining data models, or integrating native platform channels.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -123,3 +123,15 @@ Response → Repository (map to Domain Entity) → BLoC (emit Success/Error) →
 -   **Why, not What**: Comments MUST explain the rationale (intent), not what the code does.
 -   **Public API**: Document public classes and methods with triple-slash (`///`) comments.
 -   **History**: Do NOT include version history or "fixed by" comments. Git is the source of truth.
+
+## Workflow: Implementing a New Feature
+
+Follow this sequential workflow when adding a new feature to the application. Copy the checklist to track progress.
+
+### Task Progress
+- [ ] **Step 1: Define Domain Models.** Create immutable data classes for the feature using Dart Mappable.
+- [ ] **Step 2: Implement DataSources.** Create or update DataSource classes to handle raw SDK/API calls (Dio, Isar, Firebase).
+- [ ] **Step 3: Implement Repositories.** Create the Repository to consume DataSources and return pure Domain Models.
+- [ ] **Step 4: Implement the BLoC/Cubit.** Create the state management. Inject required Repositories. Expose immutable UI state.
+- [ ] **Step 5: Implement the UI.** Create the View widgets. Use `BlocBuilder` or `BlocConsumer` to listen to state changes.
+- [ ] **Step 6: Inject Dependencies.** Register the new DataSource, Repository, and BLoC in the dependency injection container (`injectable`).

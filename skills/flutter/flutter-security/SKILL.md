@@ -1,6 +1,6 @@
 ---
 name: flutter-security
-description: Security & Data Integrity (Architect Level)
+description: Enforce architect-level security standards including AES-256-GCM encryption, secure storage, biometric gates, and memory safety. Use when handling sensitive data, credentials, clipboard content, or API communication security.
 metadata:
     platforms: "flutter, mobile"
     languages: "dart"
