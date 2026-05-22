@@ -58,3 +58,50 @@ metadata:
 -   Set `FlutterError.onError` and `PlatformDispatcher.instance.onError` to catch framework and async errors
 -   Wrap critical widget subtrees in custom error boundary widgets that show fallback UI instead of red screens
 -   In release mode: NEVER show stack traces to users — show user-friendly error messages only
+
+# Runtime Error Taxonomy
+
+Categorize and fix Dart runtime errors systematically using static analysis and type system knowledge.
+
+## Type System Soundness
+-   **Method Overrides**: Maintain sound return types (covariant) and parameter types (contravariant). Use `covariant` keyword when intentionally tightening parameter types.
+-   **Generics**: Add explicit type annotations to generic classes (`List<int>` not `List<dynamic>`). Never assign `List<dynamic>` to a typed list.
+-   **Downcasting**: Avoid implicit downcasts from `dynamic`. Use explicit casts (`as Type`) only when runtime type is guaranteed.
+-   **Enable Strict Casts**: Add to `analysis_options.yaml`:
+    ```yaml
+    analyzer:
+      language:
+        strict-casts: true
+    ```
+
+## Null Safety Error Patterns
+
+| Error | Cause | Fix |
+|---|---|---|
+| `Property cannot be accessed on nullable receiver` | Accessing member on `Type?` | Use `?.` or null check |
+| `Non-nullable instance field must be initialized` | Uninitialized non-null field | Use `late` or make nullable |
+| `The argument type can't be assigned` | `Type?` passed where `Type` expected | Add null check or `!` (with caution) |
+
+**Rules**:
+-   Avoid `!` operator — prefer pattern matching or early returns.
+-   Use `late` only when initialization is guaranteed before first access.
+-   Use `_` wildcard (Dart 3.7+) for unused variables.
+
+## Automated Resolution Workflow
+
+```bash
+# 1. Identify all errors
+dart analyze . --fatal-infos
+
+# 2. Preview automated fixes
+dart fix --dry-run
+
+# 3. Apply automated fixes
+dart fix --apply
+
+# 4. Verify resolution
+dart analyze .
+dart test
+```
+
+**Feedback Loop**: If `dart test` fails with `TypeError` after fixing → you introduced an invalid cast (`as T`) or accessed an uninitialized `late` variable. Locate and correct.
