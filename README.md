@@ -1,11 +1,11 @@
 # Flutter Agent Skills Library
 
-A collection of 24 specialized coding agent skills for professional Flutter and Dart development. Optimized for **Claude Code**, **GitHub Copilot**, **Antigravity**, **Cursor**, and **OpenAI Codex**.
+A collection of 30 specialized coding agent skills for professional Flutter and Dart development. Works with **Claude Code**, **GitHub Copilot**, **Antigravity**, **Cursor**, and **OpenAI Codex**.
 
-🌐 **[View Live Documentation](https://dhruvanbhalara.github.io/skills/)**
+[View Live Documentation](https://dhruvanbhalara.github.io/skills/)
 
 
-## 🚀 Installation
+## Installation
 
 These skills can be installed into your AI coding agent using the [skills.sh](https://skills.sh) CLI:
 
@@ -17,19 +17,19 @@ npx skills add dhruvanbhalara/skills
 npx skills add dhruvanbhalara/skills --skill flutter-architecture
 ```
 
-## 📂 Available Skills
+## Available Skills
 
-We offer 24 specialized skills organized by platforms and tools (`flutter`, `dart`, and `github`).
+30 specialized skills organized by platform: `flutter`, `dart`, and `github`.
 
 **[View Full Skills List](skills/README.md)**
 
-The library includes skills for Architecture, UI/UX, Git Workflows (automated commits and PRs), Testing, Networking, and more.
+The library covers architecture, UI, git workflows, testing, networking, and more.
 
-## 🤖 Global Agent Instructions
+## Global Agent Instructions
 
-For agents that support global project-level guidance (like GitHub Copilot or Codex), we provide:
+For agents that support project-level guidance (like GitHub Copilot or Codex), we provide:
 - `.github/copilot-instructions.md`
 - `AGENTS.md`
 
-## 📄 License
+## License
 This library is licensed under the [MIT License](LICENSE).
