@@ -1,5 +1,5 @@
 ---
-name: flutter-json-serialization
+name: flutter-implement-json-serialization
 description: Create model classes with fromJson/toJson using dart:convert and Dart 3 pattern matching. Use when manually mapping JSON to classes, parsing HTTP responses, or choosing between manual and code-generated serialization.
 metadata:
     platforms: "flutter, dart"

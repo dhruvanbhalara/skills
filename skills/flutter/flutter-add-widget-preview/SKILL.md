@@ -1,5 +1,5 @@
 ---
-name: flutter-widget-preview
+name: flutter-add-widget-preview
 description: Add interactive widget previews using the @Preview annotation system. Use when creating new UI components, verifying designs in isolation, or testing visual states without running the full app.
 metadata:
     platforms: "flutter"
