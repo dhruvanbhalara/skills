@@ -1,6 +1,6 @@
 ---
 name: flutter-testing
-description: Write comprehensive widget and integration tests using pattern-based testing (Golden Variants, State Matrix, Interaction Contracts). Use when testing UI components, user interaction flows, or running end-to-end integration tests.
+description: Define testing strategy, test pyramid, and pattern-based conventions (Golden Variants, State Matrix, Interaction Contracts). Use when establishing test architecture or choosing the right testing approach for a Flutter project.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -15,16 +15,17 @@ metadata:
 -   **Coverage Targets**: Target 100% logic coverage for `domain` and `bloc` layers.
 -   **Test Independence**: Each test MUST be independent. No shared mutable state between tests.
 
-# Widget Testing
+# Test Types Overview
 
--   Write widget tests for all major UI components.
--   Test user interactions and state changes.
--   **Widget Keys**: Use `Key('feature_action_id')` format on interactive widgets for test access.
--   **Test Localization**: Use `AppLocalizations` (`context.l10n`) in widget tests — no hardcoded strings.
+| Type | Scope | Speed | Skill |
+|---|---|---|---|
+| **Unit** | Single function/class | Fast | `dart-testing` |
+| **Widget** | Single UI component | Medium | `flutter-add-widget-test` |
+| **Integration** | Full app / user flow | Slow | `flutter-add-integration-test` |
 
 # Pattern-Based Testing
 
-Adopt these three structural patterns to eliminate boilerplate, enforce complete coverage, and ensure consistency across the test suite. These are conventions — no external package dependency is required.
+These three patterns cut repetitive test setup, cover all visual states, and keep widget behavior consistent. They're conventions, not packages.
 
 ## Golden Variant Testing
 When a widget has multiple visual states (primary, disabled, hover, error), test all variants in a single structured `group()` with a `Map<String, Widget Function()>`:
@@ -53,13 +54,6 @@ Reusable widgets have implicit behavioral rules. Define these as explicit, reusa
 -   **When to use**: Widgets with strictly defined behavioral rules that must hold across refactors.
 -   **When NOT to use**: One-off logic unique to a single widget.
 
-# Integration Testing
-
--   Use `IntegrationTestWidgetsFlutterBinding.ensureInitialized()` at the start of integration tests
--   Interact with widgets via `Key` (e.g., `find.byKey(const ValueKey('increment'))`)
--   Use `pumpAndSettle()` to wait for animations and async operations to complete
--   Run with: `flutter test integration_test/`
-
 # Test Naming & Structure
 
 -   **Test Naming**: Use string interpolation for test group names: `group('$ClassName',` not `group('ClassName',`. This ensures consistency and enables better tooling support.
@@ -71,20 +65,12 @@ Reusable widgets have implicit behavioral rules. Define these as explicit, reusa
 -   `A RenderFlex overflowed...` — Wrap widget in `Expanded` or constrain dimensions in test
 -   `Vertical viewport was given unbounded height` — Wrap `ListView` in `SizedBox` with fixed height in test
 -   `setState called during build` — Defer state changes to post-frame callback
+-   `No MediaQuery widget ancestor` — Always wrap test widget in `MaterialApp`
 
-## Workflow: Testing Execution
-
-Follow this sequential workflow when testing a feature. Copy the checklist to track progress.
-
-### Task Progress
-- [ ] **Step 1: Write Widget Tests.** Ensure all interactive UI elements have `Key`s. Apply Golden Variant, State Matrix, or Interaction Contract patterns as appropriate.
-- [ ] **Step 2: Write Integration Tests.** Create end-to-end user flows using `IntegrationTestWidgetsFlutterBinding`.
-- [ ] **Step 3: Check Coverage.** Run `flutter test --coverage` and verify targets are met.
-- [ ] **Step 4: Run Static Analysis.** Execute `dart analyze` to ensure code conforms to linting rules.
-
-# Running Tests
+# Running Tests (Quick Reference)
 
 -   `flutter test` — Run all unit and widget tests
 -   `flutter test test/path/to/file_test.dart` — Run specific test file
 -   `flutter test integration_test/` — Run integration tests
 -   `flutter test --coverage` — Run with coverage report
+-   `dart test` — Pure Dart unit tests

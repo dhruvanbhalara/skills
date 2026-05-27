@@ -42,3 +42,57 @@ metadata:
 
 -   Store tokens via `flutter_secure_storage` — never in source code or `SharedPreferences`
 -   All API communication MUST use HTTPS
+
+# Alternative: http Package
+
+For simple REST calls that don't need interceptors, caching, or retry logic, use `http` instead of Dio.
+
+## Dio vs http
+
+| Criteria | `http` | `Dio` |
+|---|---|---|
+| **Interceptors** | No | Yes, full chain |
+| **Retry logic** | Manual | Built-in with backoff |
+| **Response caching** | Manual | Plugin available |
+| **FormData / Multipart** | Manual | Built-in |
+| **Cancel requests** | No | Yes, `CancelToken` |
+| **Dependencies** | Minimal (1 package) | Heavier |
+| **Use case** | Simple CRUD APIs | Production API clients |
+
+Use `http` for prototypes and simple fetch-and-display. Use `Dio` for production API clients that need auth, retry, and caching.
+
+## Basic http Patterns
+
+```dart
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+// GET request
+Future<Map<String, dynamic>> fetchData(http.Client client) async {
+  final response = await client.get(
+    Uri.parse('https://api.example.com/data'),
+    headers: {'Accept': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    return jsonDecode(response.body) as Map<String, dynamic>;
+  } else {
+    throw Exception('Failed to fetch: ${response.statusCode}');
+  }
+}
+
+// POST request
+Future<void> createItem(http.Client client, Map<String, dynamic> body) async {
+  final response = await client.post(
+    Uri.parse('https://api.example.com/items'),
+    headers: {'Content-Type': 'application/json'},
+    body: jsonEncode(body),
+  );
+
+  if (response.statusCode != 201) {
+    throw Exception('Failed to create: ${response.statusCode}');
+  }
+}
+```
+
+**Testing**: Always accept `http.Client` as a parameter (not `http.get()` directly) to enable mock injection in tests.

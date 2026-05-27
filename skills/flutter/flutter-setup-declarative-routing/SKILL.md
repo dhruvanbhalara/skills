@@ -17,7 +17,7 @@ metadata:
 
 ## Core Concepts
 
-Use the `go_router` package for declarative routing in Flutter. It provides a robust API for complex routing scenarios, deep linking, and nested navigation. 
+Use the `go_router` package for declarative routing in Flutter. It provides a reliable API for complex routing scenarios, deep linking, and nested navigation. 
 
 - **GoRouter**: The central configuration object defining the application's route tree.
 - **GoRoute**: A standard route mapping a URL path to a Flutter screen.

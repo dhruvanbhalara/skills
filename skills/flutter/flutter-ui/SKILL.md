@@ -48,7 +48,48 @@ Use `AppColors`, `AppSpacing`, `AppRadius`, and `AppTypography`. NEVER hardcode 
     -   `Vertical viewport was given unbounded height`: Often happens when nesting scrollable views (like `ListView` inside `Column`). Use `Expanded` on the `ListView` or set `shrinkWrap: true`.
 -   **Rules**: Never lock orientation unless strictly required by a unique feature. Support keyboard navigation and hover effects for desktop users.
 
-# 6. UI States & Accessibility
+# 6. Responsive Layout Patterns
+
+## LayoutBuilder vs MediaQuery
+
+| Tool | Use When | Returns |
+|---|---|---|
+| `MediaQuery.sizeOf(context)` | Layout depends on **screen size** (app-level breakpoints) | `Size` of the screen |
+| `LayoutBuilder` | Layout depends on **parent constraints** (widget-level) | `BoxConstraints` from parent |
+
+**Rule**: Use `MediaQuery` for page-level layouts. Use `LayoutBuilder` for reusable components that adapt to their container.
+
+## Breakpoint Conventions
+
+| Window Class | Width | Layout | Columns |
+|---|---|---|---|
+| Compact | < 600dp | Single column, bottom nav | 4 |
+| Medium | 600–840dp | Two-pane, navigation rail | 8 |
+| Expanded | > 840dp | Multi-pane, side navigation | 12 |
+
+## Adaptive Layout Pattern
+```dart
+Widget build(BuildContext context) {
+  final width = MediaQuery.sizeOf(context).width;
+  return switch (width) {
+    < 600 => const MobileLayout(),
+    < 840 => const TabletLayout(),
+    _ => const DesktopLayout(),
+  };
+}
+```
+
+## Constraint Widgets
+
+| Widget | Behavior | Use When |
+|---|---|---|
+| `Expanded` | Fill ALL remaining space in `Row`/`Column` | Child should stretch |
+| `Flexible` | Allow child to be SMALLER than remaining space | Child has natural size |
+| `FractionallySizedBox` | Size as fraction of parent (e.g., 0.5 = 50%) | Proportional layouts |
+| `ConstrainedBox` | Set min/max constraints | Bounded flexibility |
+| `SizedBox` | Fixed absolute dimensions | Known exact size |
+
+# 7. UI States & Accessibility
 
 -   **States**: Always handle Loading, Error, and Empty states with clear messaging.
 -   **Accessibility**: Include `Semantics` labels. Ensure 48x48 dp touch targets. WCAG AA contrast.

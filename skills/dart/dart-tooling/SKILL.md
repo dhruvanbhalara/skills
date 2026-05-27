@@ -26,16 +26,55 @@ Use this sequential workflow to identify, fix, and verify static analysis errors
 
 ## Resolving Package Conflicts
 
-When adding or upgrading dependencies, conflicts can occur if transitive dependencies require incompatible versions of shared packages.
-1. **Analyze Constraints**: Read the error message carefully. Identify the direct dependency you are trying to add/upgrade and the existing dependencies that share a transitive dependency.
-2. **Determine Shared Constraints**: Find the overlapping version range for the shared transitive dependency.
-3. **Apply `dependency_overrides`**: Add a temporary override in `pubspec.yaml` using the highest common compatible version.
-    ```yaml
-    dependency_overrides:
-      shared_package: ^x.y.z
-    ```
-4. **Run `flutter pub get` or `dart pub get`**: Ensure the resolution succeeds.
-5. **Update Direct Dependencies**: Eventually, upgrade the direct dependencies to versions that natively support the newer transitive package, and remove the override.
+When `pub get` fails due to incompatible package versions, use this systematic approach.
+
+### Understanding `dart pub outdated`
+
+| Column | Meaning |
+|---|---|
+| **Current** | Version in `pubspec.lock` right now |
+| **Upgradable** | Latest version allowed by `pubspec.yaml` constraints |
+| **Resolvable** | Latest version that CAN be resolved with all other deps |
+| **Latest** | Latest published version (ignoring constraints) |
+
+```bash
+dart pub outdated
+```
+
+### Version Constraint Best Practices
+-   **Use Caret Syntax**: Always use `^1.2.3` — allows non-breaking updates up to next major version.
+-   **Tighten Dev Dependencies**: Set lower bounds to exact current version for `dev_dependencies`.
+-   **CI Reproducibility**: Use `dart pub get --enforce-lockfile` in CI to ensure exact tested versions.
+
+### Upgrading Dependencies
+
+**If updating to "Upgradable" versions:**
+```bash
+dart pub upgrade
+dart pub upgrade --tighten  # Auto-update lower bounds in pubspec.yaml
+```
+
+**If updating to "Resolvable" versions (major):**
+1.  Manually edit `pubspec.yaml` to bump constraints.
+2.  Run `dart pub upgrade`.
+3.  Run `dart analyze` → fix breaking API changes.
+4.  Run `dart test` → fix regressions.
+
+### Surgical Lockfile Removal
+
+**NEVER** delete the entire `pubspec.lock`. This causes uncontrolled upgrades across the dependency graph.
+
+Instead, remove ONLY the conflicting package's block:
+1.  Open `pubspec.lock`.
+2.  Find and delete ONLY the conflicting package's YAML block.
+3.  Run `dart pub get` — fetches newest compatible version for that package only.
+4.  Verify: `dart pub deps` → check dependency graph resolves correctly.
+
+### Temporary Overrides (Last Resort)
+```yaml
+dependency_overrides:
+  shared_package: ^x.y.z  # Remove once direct deps support newer version
+```
 
 ## Migrating Tests to package:checks
 
