@@ -1,5 +1,5 @@
 ---
-name: flutter-architecture
+name: flutter-apply-architecture-best-practices
 description: Enforce Clean Architecture with BLoC pattern for Flutter applications. Use when scaffolding features, structuring data/domain/presentation layers, defining data models, or integrating native platform channels.
 metadata:
     platforms: "flutter"

@@ -37,7 +37,7 @@ Implement the `args` package to manage command-line arguments, flags, and subcom
 
 ## Execution & Error Handling
 
-Leverage the `io` and `stack_trace` packages to build robust, production-ready CLI tools.
+Use the `io` and `stack_trace` packages to build reliable, production-ready CLI tools.
 
 *   Use the `io` package's `ExitCode` enum to return standard POSIX exit codes (e.g., `ExitCode.success.code`, `ExitCode.usage.code`).
 *   Use `sharedStdIn` from the `io` package if multiple asynchronous listeners need sequential access to standard input.
