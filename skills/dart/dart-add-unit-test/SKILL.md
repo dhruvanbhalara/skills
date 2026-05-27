@@ -1,5 +1,5 @@
 ---
-name: dart-testing
+name: dart-add-unit-test
 description: Write unit tests with mocking and coverage analysis for pure Dart projects and CLI apps. Use when testing business logic, generating mocks with Mockito or mocktail, or measuring test coverage.
 metadata:
     platforms: "dart"

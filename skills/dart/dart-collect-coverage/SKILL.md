@@ -1,5 +1,5 @@
 ---
-name: dart-coverage
+name: dart-collect-coverage
 description: Collect test coverage, generate LCOV/HTML reports, and apply coverage ignore directives. Use when measuring test coverage, setting up coverage gates in CI, or generating coverage reports for Dart and Flutter projects.
 metadata:
     platforms: "dart, flutter"
