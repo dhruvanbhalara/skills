@@ -48,7 +48,16 @@ For complex APIs, avoid manual string-based keys. Use **Pigeon** to generate typ
 
 Organize native code within the relevant feature if possible, or use a dedicated `plugins/` directory for shared logic.
 
-## 5. Federated Plugins
+## 5. Swift Package Manager (SPM) Defaults
+*Introduced in Flutter 3.44*
+- For iOS/macOS native integrations, SPM is the default package manager. It replaces CocoaPods entirely for new configurations.
+- Declare Swift Packages directly in your plugin's `pubspec.yaml` using the `swift_packages` field, or configure them directly via Xcode workspaces (see [flutter-spm](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/flutter/flutter-spm/SKILL.md)).
+
+## 6. Platform View Overhaul
+*Introduced in Flutter 3.44*
+- Embedded native views (such as maps, web views, cameras) leverage an overhauled hybrid composition rendering pipeline to minimize dropped frames and eliminate UI compositing performance issues.
+
+## 7. Federated Plugins
 
 If the logic is reusable across multiple apps:
 - Split implementation into `_platform_interface`, `_android`, `_ios`, and `_web` packages.

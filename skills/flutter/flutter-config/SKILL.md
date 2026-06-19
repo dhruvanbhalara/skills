@@ -82,9 +82,10 @@ void main() {
 
 ## iOS
 
--   Create Xcode schemes for each flavor (Dev, Staging, Prod)
--   Use xcconfig files for per-flavor bundle ID, display name, and signing
--   Map Flutter flavors to Xcode schemes in `ios/Runner.xcodeproj`
+-   Create Xcode schemes for each flavor (Dev, Staging, Prod).
+-   Use xcconfig files for per-flavor bundle ID, display name, and signing.
+-   Map Flutter flavors to Xcode schemes in `ios/Runner.xcodeproj`.
+-   **Swift Package Manager Integration**: When configuring iOS flavors, Xcode schemes map package dependency configurations automatically. No CocoaPods `Podfile` changes are required for SPM. Ensure all dependency overrides are defined under Package Dependencies inside Xcode Runner project settings.
 
 # Firebase Per-Flavor
 

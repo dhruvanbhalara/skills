@@ -92,6 +92,10 @@ Choose the execution method based on target platform:
 ```bash
 flutter test integration_test/
 ```
+For iOS, when running under the default Swift Package Manager (SPM) integration (Flutter 3.44+), ensure you run package resolution first:
+```bash
+xcodebuild -resolvePackageDependencies -workspace ios/Runner.xcworkspace -scheme Runner
+```
 
 ### Chrome (Web)
 ```bash
