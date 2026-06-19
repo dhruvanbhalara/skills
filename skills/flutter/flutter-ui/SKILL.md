@@ -12,6 +12,7 @@ metadata:
 -   **Const-First**: Every widget that can be `const` MUST be `const`.
 -   **Lazy Rendering**: Use `SliverList.builder` or `SliverGrid.builder` for lists > 10 items.
 -   **Repaint Boundaries**: Wrap complex animations in `RepaintBoundary`.
+-   **Impeller Rendering**: Impeller is the default rendering engine for iOS and Android. Ensure custom canvas paints are optimized and do not rely on Skia-specific behaviors.
 -   **Isolate Parsing**: Use `compute()` or `Isolate` for JSON > 1MB.
 -   **BuildContext Safety**: Check `mounted` before using `context` across async gaps.
 
@@ -36,13 +37,15 @@ Use `AppColors`, `AppSpacing`, `AppRadius`, and `AppTypography`. NEVER hardcode 
 -   **Slivers**: Prefer `CustomScrollView` with Slivers for non-trivial scrollable layouts.
 -   **FAB**: Use Floating Action Buttons for primary positive actions (Add, Create).
 -   **Scroll Padding**: Add dynamic bottom padding when a FAB or BottomBar is present to prevent overlap.
+-   **Pop Handling**: NEVER use the deprecated `WillPopScope` widget. Use the standard `PopScope` widget to intercept or block back-navigation.
 -   **Sheets vs Screens**: Prefer full `Scaffold` screens over `ModalBottomSheet` for complex forms.
 
 # 5. Adaptive & Responsive Design and Common Fixes
 
 -   **Mobile First**: Design for mobile, then adapt for tablet (`600-840dp`) and desktop (`>840dp`). Use `MediaQuery.sizeOf(context).width`.
 -   **Layout Builder**: Use `LayoutBuilder` when widget rendering depends on the immediate parent's constraints, not the whole screen.
--   **Safe Area**: Always wrap main layouts in `SafeArea` to avoid device notches and system UI.
+-   **Safe Area & Android 15**: Wrap main layouts in `SafeArea` to avoid device notches and system bar overlays. Since Android 15 enforces edge-to-edge rendering by default, use `MediaQuery.paddingOf(context)` or `SafeArea` to prevent widgets from clipping under the system status or navigation bars.
+-   **Modular UI Imports**: Flutter 3.44+ decouples `material` and `cupertino` from the core framework. In pure structural widgets, import only `package:flutter/widgets.dart` to maintain clear library separation.
 -   **Overflow Fixes**:
     -   `A RenderFlex overflowed...`: Typically means a widget is demanding more space than available in a `Row` or `Column`. Wrap the offending widget in `Expanded` or `Flexible`.
     -   `Vertical viewport was given unbounded height`: Often happens when nesting scrollable views (like `ListView` inside `Column`). Use `Expanded` on the `ListView` or set `shrinkWrap: true`.
