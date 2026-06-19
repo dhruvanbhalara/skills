@@ -22,6 +22,8 @@ Performance in Dart goes beyond UI rendering; it's about efficient execution, sm
 ## Compile-Time Optimizations
 - **Final & Const**: Declare variables as `final` whenever possible. Use `const` constructors for widgets and data models to enable compile-time allocation and reduce runtime garbage collection pressure.
 - **Ternary vs If-Else**: In Dart, they are generally equivalent, but prioritize readability. Use `switch` expressions (Dart 3+) for exhaustive and efficient pattern matching.
+- **Extension Types**: Use Dart 3.3+ `extension type` zero-cost abstractions for type wrapping to eliminate runtime allocation overhead (see [dart-modern-syntax](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/dart/dart-modern-syntax/SKILL.md)).
+- **Private Named Parameters**: Use Dart 3.12+ `MyClass({this._privateField})` constructors to eliminate initializer list code boilerplate (see [dart-modern-syntax](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/dart/dart-modern-syntax/SKILL.md)).
 
 ## Hot Paths & Loops
 - **Minimize Work in Loops**: Extract calculations and object creations outside of loops.

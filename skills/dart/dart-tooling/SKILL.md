@@ -22,7 +22,8 @@ Use this sequential workflow to identify, fix, and verify static analysis errors
    - `dart fix --dry-run`
    - `dart fix --apply`
 3. **Resolve Manually**: Address Type Mismatches, Null Safety, or Invalid Overrides that `dart fix` couldn't automatically resolve.
-4. **Verify**: Ensure both `dart analyze .` and `dart test` pass.
+4. **Performance Diagnostics**: Utilize the Analysis Server diagnostics page (available at `http://localhost:8082` when analyzer runs) to trace and diagnose slow analysis times.
+5. **Verify**: Ensure both `dart analyze .` and `dart test` pass.
 
 ## Resolving Package Conflicts
 
@@ -40,6 +41,10 @@ When `pub get` fails due to incompatible package versions, use this systematic a
 ```bash
 dart pub outdated
 ```
+
+### Git LFS Support
+*Introduced in Dart 3.12*
+- The `dart pub` package management command natively supports Git Large File Storage (LFS). Dependencies fetched from Git repositories that contain LFS objects (e.g. assets, binaries, models) resolve automatically without requiring local configuration.
 
 ### Version Constraint Best Practices
 -   **Use Caret Syntax**: Always use `^1.2.3` — allows non-breaking updates up to next major version.
