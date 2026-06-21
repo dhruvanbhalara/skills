@@ -27,10 +27,11 @@ metadata:
 
 # Debugging Strategies
 
--   **Layout Issues**: Use `debugPaintSizeEnabled = true` to visualize widget boundaries
+-   **Layout Issues**: Use `debugPaintSizeEnabled = true` to visualize widget boundaries (see [flutter-devtools](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/flutter/flutter-devtools/SKILL.md)).
 -   **Overflow Errors**: Check `RenderFlex overflowed` — use `Expanded`, `Flexible`, or constrain dimensions
 -   **Unbounded Height**: Wrap `ListView` in `SizedBox` or use `shrinkWrap: true` with `NeverScrollableScrollPhysics`
 -   **Rebuild Tracking**: Add `debugPrint('$runtimeType rebuild')` temporarily to identify excessive rebuilds — remove before commit
+-   **Agentic Hot Reload**: In Flutter 3.44+/Dart 3.12+, AI coding agents and MCP servers detect code modifications and trigger hot reload automatically. Keep a debug daemon running (`flutter run`) to enable real-time updates.
 -   **Async Errors**: Always catch and log errors in `try-catch` blocks with stack traces
 -   Use `assert()` for development-time invariant checks that are stripped in release builds
 
@@ -44,13 +45,15 @@ metadata:
 
 # Performance Profiling
 
--   Always profile with `--profile` mode (not debug): `flutter run --profile --flavor dev -t lib/main_dev.dart`
+-   Always profile with `--profile` mode (not debug): `flutter run --profile --flavor dev`
 -   Use `Timeline.startSync` / `Timeline.finishSync` for custom performance tracing of critical paths
--   Monitor shader compilation jank on first run — use `--cache-sksl` for warmup:
-    ```bash
-    flutter run --profile --cache-sksl --purge-persistent-cache
-    ```
--   Target metrics: < 16ms frame build time, < 100ms screen transition, < 2s cold start
+-   **Impeller Graphics**: Impeller is the default rendering engine on iOS and Android. Pre-compiling shaders (SkSL warmup) is deprecated and no longer needed. If rendering artifacts occur, verify compilation logs in the terminal.
+-   Target metrics for displays:
+    - **60Hz screens**: < 16.6ms frame build time.
+    - **90Hz screens**: < 11.1ms frame build time.
+    - **120Hz screens**: < 8.3ms frame build time.
+    - Screen transition: < 100ms.
+    - Cold start: < 2s.
 
 # Error Boundaries
 

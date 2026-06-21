@@ -45,6 +45,33 @@ metadata:
 -   Upload to Google Play Internal Track / TestFlight for staging
 -   Production release requires manual approval gate
 
+# Caching Strategy
+
+To optimize build speeds, cache dependencies in your GitHub Actions workflows:
+
+```yaml
+- name: Cache Flutter dependencies
+  uses: actions/cache@v4
+  with:
+    path: |
+      ~/.pub-cache
+      .dart_tool
+    key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+    restore-keys: |
+      ${{ runner.os }}-pub-
+
+- name: Cache iOS/macOS Native dependencies (SPM & CocoaPods)
+  uses: actions/cache@v4
+  with:
+    path: |
+      ~/Library/Caches/org.swift.swiftpm
+      ~/Library/Developer/Xcode/DerivedData
+      ios/Pods
+    key: ${{ runner.os }}-native-${{ hashFiles('ios/Podfile.lock', '**/pubspec.yaml') }}
+    restore-keys: |
+      ${{ runner.os }}-native-
+```
+
 # Versioning Strategy
 
 -   Follow Semantic Versioning: `MAJOR.MINOR.PATCH+BUILD`
