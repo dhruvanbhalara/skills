@@ -1,6 +1,6 @@
-# Flutter & Dart Agent Skills Library
+# Agent Skills Library
 
-A collection of 42 specialized coding agent skills for professional Flutter and Dart development. These skills help AI coding assistants (like Antigravity, Claude Code, Cursor, and Copilot) follow your project standards for architecture, testing, UI design, and CI/CD.
+A collection of 42 specialized coding agent skills for professional software development, including Flutter, Dart, and GitHub workflows. These skills help AI coding assistants (like Antigravity, Claude Code, Cursor, and Copilot) follow your project standards for architecture, testing, UI design, and CI/CD.
 
 [View Live Documentation](https://dhruvanbhalara.github.io/skills/)
 

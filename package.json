@@ -1,7 +1,7 @@
 {
-  "name": "flutter-agent-skills-site",
+  "name": "agent-skills-site",
   "version": "1.0.0",
-  "description": "Premium documentation site for Flutter Agent Skills",
+  "description": "Premium documentation site for the Agent Skills Library",
   "main": "scripts/build_site.js",
   "scripts": {
     "build": "node scripts/build_site.js",

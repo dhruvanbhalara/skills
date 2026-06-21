@@ -405,7 +405,7 @@ function getMetaTags(title, description, path = '') {
 
 function generateIndexPage(skills) {
   const title = "Agent Skills Library — The Directory for AI Agents";
-  const description = "Premium documentation library for professional Flutter and Dart AI agents. Built for Antigravity, Copilot, and Cursor.";
+  const description = "Premium documentation library for professional coding agent skills. Built for Antigravity, Copilot, and Cursor.";
 
   const html = `
 <!DOCTYPE html>

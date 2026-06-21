@@ -1,1 +1,0 @@
-skills/README.md

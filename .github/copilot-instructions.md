@@ -1,6 +1,6 @@
-# Flutter Project Instructions & Best Practices
+# Project Instructions & Best Practices
 
-As an AI agent working on this repository, you MUST adhere to the following core principles and coding standards. These are synthesized from the individual skills in the `skills/` directory.
+As an AI agent working on this repository, you MUST adhere to the following core principles and coding standards. These are synthesized from the individual skills in the `skills/` directory (covering Flutter, Dart, GitHub, and other development workflows).
 
 ## Core Tech Stack
 - **Language**: Dart 3 (Strong typing, null safety, exhaustive switch expressions)
