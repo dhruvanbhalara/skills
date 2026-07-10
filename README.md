@@ -67,8 +67,9 @@ npx skills add dhruvanbhalara/skills --skill flutter-spm
 - [flutter-use-http-package](skills/flutter/flutter-use-http-package/SKILL.md) — Execute standard REST network calls using the built-in HTTP package.
 - [flutter-wasm-web](skills/flutter/flutter-wasm-web/SKILL.md) — Compile and optimize web applications for WebAssembly (Wasm-GC).
 
-### GitHub Skills (3)
+### GitHub Skills (4)
 
+- [changelog-writing](skills/github/changelog-writing/SKILL.md) — Audit and rewrite project changelogs to adhere strictly to Keep a Changelog and Semantic Versioning standards.
 - [git-commit](skills/github/git-commit/SKILL.md) — Write clean, atomic commits following the Conventional Commits specification.
 - [github-actions](skills/github/github-actions/SKILL.md) — Build CI/CD pipelines to run format checks, tests, and build releases.
 - [github-pr](skills/github/github-pr/SKILL.md) — Create structured Pull Requests with assignees, labels, and check validations.

@@ -31,6 +31,7 @@ As an AI agent working on this repository, you MUST adhere to the following core
 - **Atomic Commits**: One commit = one logical change. Follow Conventional Commits: `type(scope): description`.
 - **Commit Bodies**: Include sub-messages to explain the "why" and "how" of changes.
 - **Pull Requests**: Ensure zero analysis warnings and passing tests before PR. Provide descriptive titles and internal/external change summaries.
+- **Changelogs**: Follow Keep a Changelog standards. Do not copy commit logs directly. Read the git history of the target branch, then summarize the changes under clear categories (Added, Changed, Fixed, Removed).
 
 ## Security
 - **Sensitive Data**: Use `flutter_secure_storage` for tokens and secrets. NEVER use `SharedPreferences` or source code for secrets.
