@@ -289,7 +289,7 @@ function getBaseStyles() {
       text-transform: uppercase;
       cursor: pointer;
       letter-spacing: 0.5px;
-      transition: all 0.2s ease;
+      transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
     }
     .filter-btn:hover { background: var(--badge-bg); color: var(--text); }
     .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
@@ -374,7 +374,7 @@ function getBaseStyles() {
       font-weight: 600;
       cursor: pointer;
       opacity: 0;
-      transition: all 0.2s ease;
+      transition: opacity 0.2s ease, transform 0.15s ease;
     }
     pre:hover .copy-btn { opacity: 1; }
     .copy-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
@@ -410,6 +410,17 @@ function getBaseStyles() {
 function getThemeScript() {
   return `
     (function() {
+      function suppressTransitions() {
+        const css = document.createElement('style');
+        css.type = 'text/css';
+        css.appendChild(document.createTextNode('* { transition: none !important; }'));
+        document.head.appendChild(css);
+        return () => {
+          window.getComputedStyle(css).opacity;
+          document.head.removeChild(css);
+        };
+      }
+
       function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         const icon = document.getElementById('theme-icon');
@@ -420,14 +431,16 @@ function getThemeScript() {
       applyTheme(savedTheme);
 
       window.toggleTheme = function() {
+        const restore = suppressTransitions();
         const current = document.documentElement.getAttribute('data-theme');
         const next = current === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', next);
         applyTheme(next);
+        requestAnimationFrame(() => restore());
       };
 
       // Sync theme on back/forward navigation
-      window.addEventListener('pageshow', (event) => {
+      window.addEventListener('pageshow', () => {
         const currentTheme = localStorage.getItem('theme') || 'dark';
         applyTheme(currentTheme);
       });
@@ -437,6 +450,7 @@ function getThemeScript() {
 
         if (typeof hljs !== 'undefined') hljs.highlightAll();
 
+        // Code block copy buttons
         document.querySelectorAll('pre').forEach(block => {
           const button = document.createElement('button');
           button.className = 'copy-btn';
@@ -444,56 +458,160 @@ function getThemeScript() {
           button.addEventListener('click', () => {
             const codeBlock = block.querySelector('code');
             if (!codeBlock) return;
-            const code = codeBlock.innerText;
-            navigator.clipboard.writeText(code).then(() => {
+            navigator.clipboard.writeText(codeBlock.innerText).then(() => {
               button.innerText = 'Copied!';
-              setTimeout(() => button.innerText = 'Copy', 2000);
+              button.style.borderColor = 'var(--color-electric-iris)';
+              setTimeout(() => {
+                button.innerText = 'Copy';
+                button.style.borderColor = '';
+              }, 2000);
             });
           });
           block.appendChild(button);
         });
 
-        // Filtering & Search Logic
+        // Search & Filter
         const searchInput = document.getElementById('search-input');
         const filterBtns = document.querySelectorAll('.filter-btn');
-        let activePlatform = 'all';
+        const emptyState = document.getElementById('empty-state');
+        let activeCategory = 'all';
 
         function updateVisibility() {
-          const query = searchInput.value.toLowerCase();
+          const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
           const cards = document.querySelectorAll('.card');
+          let visibleCount = 0;
 
           cards.forEach(card => {
-            const title = card.getAttribute('data-title').toLowerCase();
-            const desc = card.getAttribute('data-desc').toLowerCase();
-            const platforms = card.getAttribute('data-platforms').toLowerCase();
-            const category = card.getAttribute('data-category').toLowerCase();
+            const title = (card.getAttribute('data-title') || '').toLowerCase();
+            const desc = (card.getAttribute('data-desc') || '').toLowerCase();
+            const platforms = (card.getAttribute('data-platforms') || '').toLowerCase();
+            const category = (card.getAttribute('data-category') || '').toLowerCase();
 
-            const matchesSearch = title.includes(query) || desc.includes(query) || platforms.includes(query) || category.includes(query);
-            const matchesPlatform = activePlatform === 'all' || platforms.includes(activePlatform);
+            const matchesSearch = !query || title.includes(query) || desc.includes(query) || platforms.includes(query) || category.includes(query);
+            const matchesCategory = activeCategory === 'all' || platforms.includes(activeCategory) || category === activeCategory;
 
-            if (matchesSearch && matchesPlatform) {
+            if (matchesSearch && matchesCategory) {
               card.style.display = 'flex';
+              visibleCount++;
             } else {
               card.style.display = 'none';
             }
           });
+
+          if (emptyState) {
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+          }
         }
 
         if (searchInput) {
           searchInput.addEventListener('input', updateVisibility);
+          // Global shortcut '/' to search
+          window.addEventListener('keydown', (e) => {
+            if (e.key === '/' && document.activeElement !== searchInput) {
+              const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+              if (activeTag !== 'input' && activeTag !== 'textarea' && !document.activeElement.isContentEditable) {
+                e.preventDefault();
+                searchInput.focus();
+              }
+            }
+          });
         }
 
         filterBtns.forEach(btn => {
           btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            activePlatform = btn.getAttribute('data-platform');
+            activeCategory = btn.getAttribute('data-category') || btn.getAttribute('data-platform') || 'all';
             updateVisibility();
           });
         });
+
+        // Hero Constellation Particle Canvas
+        const canvas = document.getElementById('constellation-canvas');
+        if (canvas) {
+          const ctx = canvas.getContext('2d');
+          let width = (canvas.width = canvas.offsetWidth || (canvas.parentElement ? canvas.parentElement.clientWidth : 300));
+          let height = (canvas.height = canvas.offsetHeight || (canvas.parentElement ? canvas.parentElement.clientHeight : 300));
+
+          const colors = ['#8052ff', '#ffb829', '#15846e', '#60a5fa', '#f472b6'];
+          const particleCount = 38;
+          const particles = [];
+
+          for (let i = 0; i < particleCount; i++) {
+            particles.push({
+              x: Math.random() * width,
+              y: Math.random() * height,
+              vx: (Math.random() - 0.5) * 0.4,
+              vy: (Math.random() - 0.5) * 0.4,
+              size: Math.random() * 4 + 2,
+              color: colors[Math.floor(Math.random() * colors.length)],
+              angle: Math.random() * Math.PI * 2,
+              va: (Math.random() - 0.5) * 0.02
+            });
+          }
+
+          function drawTriangle(x, y, size, angle, color) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            ctx.beginPath();
+            ctx.moveTo(0, -size);
+            ctx.lineTo(size * 0.86, size * 0.5);
+            ctx.lineTo(-size * 0.86, size * 0.5);
+            ctx.closePath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 1.2;
+            ctx.stroke();
+            ctx.restore();
+          }
+
+          let animId;
+          function render() {
+            ctx.clearRect(0, 0, width, height);
+
+            // Connect nearby particles with subtle lines
+            for (let i = 0; i < particles.length; i++) {
+              for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 90) {
+                  ctx.beginPath();
+                  ctx.moveTo(particles[i].x, particles[i].y);
+                  ctx.lineTo(particles[j].x, particles[j].y);
+                  ctx.strokeStyle = 'rgba(128, 82, 255, ' + ((1 - dist / 90) * 0.25) + ')';
+                  ctx.lineWidth = 0.8;
+                  ctx.stroke();
+                }
+              }
+            }
+
+            // Draw and update particles
+            for (const p of particles) {
+              p.x += p.vx;
+              p.y += p.vy;
+              p.angle += p.va;
+              if (p.x < 0) p.x = width;
+              if (p.x > width) p.x = 0;
+              if (p.y < 0) p.y = height;
+              if (p.y > height) p.y = 0;
+
+              drawTriangle(p.x, p.y, p.size, p.angle, p.color);
+            }
+            animId = requestAnimationFrame(render);
+          }
+
+          render();
+
+          window.addEventListener('resize', () => {
+            if (!canvas) return;
+            width = canvas.width = canvas.offsetWidth || (canvas.parentElement ? canvas.parentElement.clientWidth : 300);
+            height = canvas.height = canvas.offsetHeight || (canvas.parentElement ? canvas.parentElement.clientHeight : 300);
+          });
+        }
       });
     })();
-    `;
+  `;
 }
 
 function getMetaTags(title, description, path = '') {
