@@ -6,6 +6,7 @@
   "scripts": {
     "build": "node scripts/build_site.js",
     "dev": "node scripts/build_site.js --watch",
+    "test:site": "node scripts/test_site_build.js",
     "validate": "node scripts/validate_skills.js"
   },
   "dependencies": {
