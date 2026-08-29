@@ -1,6 +1,6 @@
 ---
 name: dart-build-cli-app
-description: Build Dart command-line applications with proper entrypoint structure, exit codes, and cross-platform scripting. Use when creating CLI utilities, automation scripts, or standalone Dart executables.
+description: Use when creating Dart command-line tools, parsing CLI arguments with args, handling exit codes, or managing child processes.
 metadata:
     platforms: "dart"
     languages: "dart"

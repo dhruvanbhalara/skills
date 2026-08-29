@@ -1,6 +1,6 @@
 ---
 name: flutter-setup-localization
-description: Configure internationalization and localization support using Flutter's built-in l10n system, App Resource Bundle (ARB) files, and ICU formatting syntax.
+description: Use when configuring multi-language support, App Resource Bundle (ARB) files, or plural and gender ICU formats in Flutter.
 metadata:
     platforms: "flutter"
     languages: "dart"

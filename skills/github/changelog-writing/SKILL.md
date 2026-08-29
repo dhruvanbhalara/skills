@@ -1,6 +1,6 @@
 ---
 name: changelog-writing
-description: Audit and rewrite project changelogs to adhere strictly to Keep a Changelog and Semantic Versioning standards. Use when reviewing, drafting, or refining project changelogs.
+description: Use when authoring, auditing, or updating CHANGELOG.md files to adhere strictly to Keep a Changelog and Semantic Versioning standards.
 metadata:
     platforms: "cross-platform"
     languages: "generic"
@@ -45,7 +45,7 @@ Before updating a changelog, read the git history of the target branch:
 
 ## Tone and Style
 
-* **Plain Wording**: Avoid corporate jargon or AI terms (e.g., "leverage", "streamline", "optimize", "enhance"). Use simple active verbs (e.g., "Use", "Simplify", "Improve", "Group").
+* **Plain Wording**: Avoid corporate jargon or buzzwords. Use simple active verbs (e.g., "Use", "Simplify", "Improve", "Group").
 * **Active Voice**: Start bullet points with past-tense action verbs (e.g., "Grouped 41 tools...", "Replaced format parameters...").
 * **Keep Lines Short**: Use brief, single-sentence bullet points.
 
@@ -57,7 +57,7 @@ Before updating a changelog, read the git history of the target branch:
 ```markdown
 ## 1.1.0
 
-- Refactored user authentication handlers to streamline login flow and leverage performance metrics.
+- Refactored user authentication handlers to speed up login flow and collect performance metrics.
 - We also resolved minor warnings.
 - Added custom styling to dashboard panel.
 - Fixed some bugs in the API request processor.
@@ -82,7 +82,9 @@ Before updating a changelog, read the git history of the target branch:
 ## Checklist
 
 Before saving a `CHANGELOG.md` file, verify:
-1. Are changes grouped under standard categories (`Added`, `Changed`, `Fixed`, `Removed`)?
-2. Are raw git logs, hashes, and commit messages absent?
-3. Are all entries written in plain English, free of AI terms?
-4. Is the newest version at the top?
+
+* [ ] Version header uses `## [X.Y.Z] - YYYY-MM-DD` format.
+* [ ] Changes are grouped into standard subheadings (`Added`, `Changed`, `Deprecated`, `Removed`, `Fixed`, `Security`).
+* [ ] No raw git commits or PR numbers dumped in text without explanation.
+* [ ] Language is plain, direct, and free of AI buzzwords.
+* [ ] Unreleased changes live under `## [Unreleased]`.

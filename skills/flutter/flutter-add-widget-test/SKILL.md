@@ -1,6 +1,6 @@
 ---
 name: flutter-add-widget-test
-description: Write widget tests using WidgetTester with pump patterns, finder APIs, and key-based targeting. Use when testing UI components, user interactions, or verifying widget rendering and state changes.
+description: Use when writing widget tests, finding UI elements with finders, simulating user gestures, or testing widget state updates.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -48,12 +48,12 @@ metadata:
 
 Use finders to locate widgets in the test tree. Prefer `Key`-based finders for stability.
 
--   `find.byKey(const ValueKey('login_button'))` — **Preferred**. Most stable across refactors.
--   `find.byType(ElevatedButton)` — By widget type. Fails if multiple instances exist.
--   `find.text('Submit')` — By displayed text. Avoid with localized strings.
--   `find.byIcon(Icons.add)` — By icon data.
--   `find.descendant(of: parentFinder, matching: childFinder)` — Nested lookup.
--   `find.ancestor(of: childFinder, matching: parentFinder)` — Reverse lookup.
+-   `find.byKey(const ValueKey('login_button'))`: **Preferred**. Most stable across refactors.
+-   `find.byType(ElevatedButton)`: By widget type. Fails if multiple instances exist.
+-   `find.text('Submit')`: By displayed text. Avoid with localized strings.
+-   `find.byIcon(Icons.add)`: By icon data.
+-   `find.descendant(of: parentFinder, matching: childFinder)`: Nested lookup.
+-   `find.ancestor(of: childFinder, matching: parentFinder)`: Reverse lookup.
 
 **Key Naming Convention**: Use `Key('feature_action_id')` format on interactive widgets.
 
@@ -181,7 +181,7 @@ testWidgets('shows user name from BLoC', (tester) async {
 - [ ] **Step 6**: Assert with `expect(finder, findsOneWidget)` or state checks.
 - [ ] **Step 7**: Apply Golden Variant / State Matrix / Interaction Contract pattern (see `flutter-testing`).
 - [ ] **Step 8**: Run `flutter test test/path/to/widget_test.dart`.
-- [ ] **Step 9**: Feedback Loop — fix failures → re-run until green.
+- [ ] **Step 9**: Feedback Loop: fix failures → re-run until green.
 
 ## Examples
 

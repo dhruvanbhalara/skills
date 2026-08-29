@@ -1,6 +1,6 @@
 ---
 name: flutter-debugging
-description: Debug and profile Flutter applications using DevTools, structured logging, and memory analysis. Use when diagnosing layout issues, tracking performance bottlenecks, or setting up centralized error reporting with Crashlytics.
+description: Use when diagnosing Flutter layout issues, inspecting widget rebuilds, setting breakpoints, or tracking down UI rendering anomalies.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -9,7 +9,7 @@ metadata:
 
 # Logging
 
--   Use a centralized `AppLogger` class for all logging — NEVER use `print()` or raw `debugPrint()`
+-   Use a centralized `AppLogger` class for all logging: NEVER use `print()` or raw `debugPrint()`
 -   Define log levels: `verbose`, `debug`, `info`, `warning`, `error`, `fatal`
 -   In dev flavor: log everything (verbose and above)
 -   In staging: log info and above
@@ -21,16 +21,16 @@ metadata:
 
 -   Use **Widget Inspector** to debug layout issues and identify unnecessary rebuilds
 -   Use **Performance Overlay** (`showPerformanceOverlay: true`) to monitor frame rates
--   Use **Timeline View** to identify jank — target 16ms per frame (60fps)
+-   Use **Timeline View** to identify jank: target 16ms per frame (60fps)
 -   Use **Memory View** to detect memory leaks and monitor allocation patterns
 -   Use **Network Profiler** to inspect Dio requests/responses during development
 
 # Debugging Strategies
 
--   **Layout Issues**: Use `debugPaintSizeEnabled = true` to visualize widget boundaries (see [flutter-devtools](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/flutter/flutter-devtools/SKILL.md)).
--   **Overflow Errors**: Check `RenderFlex overflowed` — use `Expanded`, `Flexible`, or constrain dimensions
+-   **Layout Issues**: Use `debugPaintSizeEnabled = true` to visualize widget boundaries (see [flutter-devtools](../flutter-devtools/SKILL.md)).
+-   **Overflow Errors**: Check `RenderFlex overflowed`: use `Expanded`, `Flexible`, or constrain dimensions
 -   **Unbounded Height**: Wrap `ListView` in `SizedBox` or use `shrinkWrap: true` with `NeverScrollableScrollPhysics`
--   **Rebuild Tracking**: Add `debugPrint('$runtimeType rebuild')` temporarily to identify excessive rebuilds — remove before commit
+-   **Rebuild Tracking**: Add `debugPrint('$runtimeType rebuild')` temporarily to identify excessive rebuilds (remove before commit)
 -   **Agentic Hot Reload**: In Flutter 3.44+/Dart 3.12+, AI coding agents and MCP servers detect code modifications and trigger hot reload automatically. Keep a debug daemon running (`flutter run`) to enable real-time updates.
 -   **Async Errors**: Always catch and log errors in `try-catch` blocks with stack traces
 -   Use `assert()` for development-time invariant checks that are stripped in release builds
@@ -38,9 +38,9 @@ metadata:
 # Memory Management
 
 -   Dispose ALL controllers, subscriptions, `Timer`, and `AnimationController` in `dispose()`
--   Use `late` initialization in `initState()` — never inline-initialize disposable objects
+-   Use `late` initialization in `initState()`: never inline-initialize disposable objects
 -   Use `WeakReference` for caches that should not prevent garbage collection
--   Profile memory with DevTools Memory tab — watch for monotonically increasing allocations
+-   Profile memory with DevTools Memory tab: watch for monotonically increasing allocations
 -   Watch for common leaks: undisposed listeners, closures capturing `BuildContext`, global streams without cancellation
 
 # Performance Profiling
@@ -60,7 +60,7 @@ metadata:
 -   Route errors to Crashlytics in staging/prod (`FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError`)
 -   Set `FlutterError.onError` and `PlatformDispatcher.instance.onError` to catch framework and async errors
 -   Wrap critical widget subtrees in custom error boundary widgets that show fallback UI instead of red screens
--   In release mode: NEVER show stack traces to users — show user-friendly error messages only
+-   In release mode: NEVER show stack traces to users: show user-friendly error messages only
 
 # Runtime Error Taxonomy
 
@@ -86,7 +86,7 @@ Categorize and fix Dart runtime errors systematically using static analysis and 
 | `The argument type can't be assigned` | `Type?` passed where `Type` expected | Add null check or `!` (with caution) |
 
 **Rules**:
--   Avoid `!` operator — prefer pattern matching or early returns.
+-   Avoid `!` operator: prefer pattern matching or early returns.
 -   Use `late` only when initialization is guaranteed before first access.
 -   Use `_` wildcard (Dart 3.7+) for unused variables.
 
@@ -101,10 +101,4 @@ dart fix --dry-run
 
 # 3. Apply automated fixes
 dart fix --apply
-
-# 4. Verify resolution
-dart analyze .
-dart test
 ```
-
-**Feedback Loop**: If `dart test` fails with `TypeError` after fixing → you introduced an invalid cast (`as T`) or accessed an uninitialized `late` variable. Locate and correct.

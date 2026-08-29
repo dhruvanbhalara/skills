@@ -1,6 +1,6 @@
 ---
 name: git-commit
-description: Create atomic, well-structured Git commits following Conventional Commits. Use when committing changes to ensure consistent commit messages with proper scoping and detailed bodies.
+description: Use when creating atomic Git commits with Conventional Commits syntax, structured scopes, and clear commit bodies.
 metadata:
     platforms: "cross-platform"
     languages: "generic"

@@ -404,8 +404,8 @@ function getMetaTags(title, description, path = '') {
 }
 
 function generateIndexPage(skills) {
-  const title = "Agent Skills Library — The Directory for AI Agents";
-  const description = "Premium documentation library for professional coding agent skills. Built for Antigravity, Copilot, and Cursor.";
+  const title = "Agent Skills Library: The Directory for AI Agents";
+  const description = "Documentation library for professional coding agent skills. Built for Antigravity, Copilot, and Cursor.";
 
   const html = `
 <!DOCTYPE html>

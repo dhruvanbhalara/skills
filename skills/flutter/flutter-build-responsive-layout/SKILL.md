@@ -1,6 +1,6 @@
 ---
 name: flutter-build-responsive-layout
-description: Build adaptive layouts using LayoutBuilder, MediaQuery, or Expanded/Flexible widgets to ensure the UI looks elegant across all mobile, tablet, and desktop form factors.
+description: Use when implementing adaptive Flutter layouts across mobile, tablet, desktop, and web screen dimensions.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -36,7 +36,7 @@ In Flutter, layouts are built using a negotiation process: **Constraints go down
 
 ## Device and Orientation Behaviors
 
-A truly responsive and professional application adapts to dynamic form factors and multiple input methods seamlessly:
+Responsive applications adapt to dynamic form factors and multiple input methods:
 
 - **Avoid locking screen orientation**: Locking the application to a single orientation is highly discouraged. It breaks the user experience on foldable devices and large-format form factors, resulting in awkward letterboxing.
 - **Provide safe fallbacks**: If orientation locking is unavoidable due to strict business mandates, utilize the `Display API` to retrieve physical screen dimensions instead of `MediaQuery`, which may return incorrect dimensions in compatibility or legacy scaling modes.

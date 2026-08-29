@@ -1,6 +1,6 @@
 ---
 name: flutter-add-integration-test
-description: Configure and run integration tests using the integration_test package with Flutter Driver. Use when testing complete user flows, verifying navigation, or running end-to-end tests on devices or CI.
+description: Use when creating end-to-end integration tests, automating user journey tests, or running tests on real devices and emulators.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -52,7 +52,7 @@ metadata:
 
 ## Test Authoring
 
--   Initialize the binding at the top of `main()` — this replaces the default test binding.
+-   Initialize the binding at the top of `main()`: this replaces the default test binding.
 -   Load the full application with `tester.pumpWidget(const MyApp())`.
 -   Use `tester.pumpAndSettle()` after every interaction to wait for animations and async operations.
 -   Assert widget visibility using `expect(find.byKey(ValueKey('foo')), findsOneWidget)`.
@@ -208,7 +208,7 @@ Future<void> main() {
 - [ ] **Step 2**: Assign `ValueKey`s to target widgets in production code.
 - [ ] **Step 3**: Create `integration_test/app_test.dart` with binding initialization.
 - [ ] **Step 4**: Create `test_driver/integration_test.dart` with `integrationDriver()`.
-- [ ] **Step 5**: Write test cases — load app, interact, assert.
+- [ ] **Step 5**: Write test cases: load app, interact, assert.
 - [ ] **Step 6**: Choose execution target:
   - Local device: `flutter test integration_test/`
   - Chrome: `flutter drive ... -d chrome`

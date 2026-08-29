@@ -1,6 +1,6 @@
 ---
 name: flutter-fix-layout-issues
-description: Diagnose and fix Flutter layout constraint violations (RenderFlex overflow, unbounded height/width, ParentData misuse). Use when encountering layout exceptions, yellow-black overflow stripes, or red error screens.
+description: Use when fixing RenderFlex overflow errors, unbounded height and width exceptions, or ParentDataWidget layout conflicts.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -24,7 +24,7 @@ Flutter layout operates on a strict negotiation rule:
 2.  The child determines its own **size** within those constraints.
 3.  The parent decides the child's **position**.
 
-Layout errors occur when this negotiation fails — typically when a parent provides **unbounded** constraints (infinite width or height) and the child attempts to expand infinitely.
+Layout errors occur when this negotiation fails (typically when a parent provides **unbounded** constraints and the child attempts to expand infinitely).
 
 ## Error Signature Catalog
 
@@ -34,7 +34,7 @@ Layout errors occur when this negotiation fails — typically when a parent prov
 | `An InputDecorator...cannot have an unbounded width` | `TextField` inside unconstrained horizontal parent (`Row`) | Wrap in `Expanded` |
 | `A RenderFlex overflowed by X pixels` | Child exceeds parent's allocated constraints | Wrap in `Expanded`, `Flexible`, or use `overflow: TextOverflow.ellipsis` |
 | `Incorrect use of ParentData widget` | `Expanded` outside `Flex`, `Positioned` outside `Stack` | Move widget to be direct child of correct parent |
-| `RenderBox was not laid out` | **Cascading error** — look upstream in stack trace | Fix the primary constraint error above it |
+| `RenderBox was not laid out` | **Cascading error**: look upstream in stack trace | Fix the primary constraint error above it |
 
 **Rule**: Always fix the **first** error in the stack trace. `RenderBox was not laid out` is almost always a cascading side effect.
 
@@ -57,7 +57,7 @@ Error detected
 │   └── Ensure Expanded is direct child of Row/Column/Flex
 │       Ensure Positioned is direct child of Stack
 └── Contains "RenderBox was not laid out"?
-    └── IGNORE — fix the error above this one
+    └── IGNORE: fix the error above this one
 ```
 
 ### Expanded vs Flexible vs SizedBox
@@ -72,7 +72,7 @@ Error detected
 ## Workflow: Fixing Layout Issues
 
 ### Task Progress
-- [ ] **Step 1**: Run app in debug mode — capture the exact exception in console.
+- [ ] **Step 1**: Run app in debug mode: capture the exact exception in console.
 - [ ] **Step 2**: Identify the **primary** error message (ignore cascading `RenderBox was not laid out`).
 - [ ] **Step 3**: Match error against the Error Signature Catalog above.
 - [ ] **Step 4**: Apply the conditional fix:

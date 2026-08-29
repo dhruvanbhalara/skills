@@ -1,6 +1,6 @@
 ---
 name: flutter-ui
-description: Build performant, accessible UIs with strict design tokens and reusable widget patterns. Use when implementing layouts, responsive breakpoints, theming, widget extraction, or fixing common rendering issues like overflow errors.
+description: Use when creating design token systems, theme definitions, reusable UI components, or accessible widget layouts.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -67,7 +67,7 @@ Use `AppColors`, `AppSpacing`, `AppRadius`, and `AppTypography`. NEVER hardcode 
 | Window Class | Width | Layout | Columns |
 |---|---|---|---|
 | Compact | < 600dp | Single column, bottom nav | 4 |
-| Medium | 600–840dp | Two-pane, navigation rail | 8 |
+| Medium | 600-840dp | Two-pane, navigation rail | 8 |
 | Expanded | > 840dp | Multi-pane, side navigation | 12 |
 
 ## Adaptive Layout Pattern

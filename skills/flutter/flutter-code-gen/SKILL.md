@@ -1,6 +1,6 @@
 ---
 name: flutter-code-gen
-description: Run Dart build_runner for code generation of Mappable classes and JSON serialization. Use after adding or modifying data model classes that require generated code.
+description: Use when generating immutable data models, JSON serialization, or dependency injection bindings using build_runner.
 metadata:
     platforms: "flutter"
     languages: "dart"

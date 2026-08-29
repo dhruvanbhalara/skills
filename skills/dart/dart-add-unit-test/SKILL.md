@@ -1,6 +1,6 @@
 ---
 name: dart-add-unit-test
-description: Write unit tests with mocking and coverage analysis for pure Dart projects and CLI apps. Use when testing business logic, generating mocks with Mockito or mocktail, or measuring test coverage.
+description: Use when writing unit tests, mocking dependencies, or validating business logic for Dart CLI and backend applications.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -45,7 +45,7 @@ Utilize `package:test` as the standard testing library for Dart CLI and backend 
 ```dart
 import 'package:mocktail/mocktail.dart';
 
-// Create mock — no code generation needed
+// Create mock: no code generation needed
 class MockUserRepository extends Mock implements UserRepository {}
 
 void main() {

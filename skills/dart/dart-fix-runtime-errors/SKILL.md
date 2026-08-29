@@ -1,6 +1,6 @@
 ---
 name: dart-fix-runtime-errors
-description: Uses static analysis diagnostics and custom handling patterns for null safety, dynamic lists, contravariance overrides, and unrecoverable errors.
+description: Use when diagnosing runtime failures, type cast errors, null check violations, or unhandled asynchronous exceptions in Dart.
 metadata:
     platforms: "dart"
     languages: "dart"

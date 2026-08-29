@@ -1,6 +1,6 @@
 ---
 name: flutter-config
-description: Configure app flavors (dev, staging, prod) with environment-specific settings via dart-define-from-file. Use when setting up build variants, per-flavor Firebase projects, or platform-specific configuration.
+description: Use when configuring build flavors, passing environment variables via dart-define-from-file, or setting up stage-specific credentials.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -38,7 +38,7 @@ metadata:
       "ENABLE_CRASHLYTICS": "false"
     }
     ```
--   NEVER put secrets (API keys, signing credentials) in these JSON files — use CI-injected env vars or `flutter_secure_storage`
+-   NEVER put secrets (API keys, signing credentials) in these JSON files: use CI-injected env vars or `flutter_secure_storage`
 -   Add `config/*.json` to `.gitignore` if they contain any environment-specific secrets; otherwise commit them for team convenience
 
 # Entry Point Pattern
@@ -59,12 +59,12 @@ void main() {
 # Environment Configuration
 
 -   Store per-flavor config in a centralized `AppConfig` class:
-    -   `baseUrl` — API endpoint per environment
-    -   `enableLogging` — verbose logging for dev only
-    -   `enableCrashlytics` — disabled in dev
-    -   `appName` — display name per flavor (e.g., "MyApp Dev", "MyApp")
--   All values come from the JSON file via `--dart-define-from-file` — NO hardcoded per-flavor logic in Dart code
--   NEVER put secrets in the JSON config files — use `flutter_secure_storage` or CI-injected env vars
+    -   `baseUrl`: API endpoint per environment
+    -   `enableLogging`: verbose logging for dev only
+    -   `enableCrashlytics`: disabled in dev
+    -   `appName`: display name per flavor (e.g., "MyApp Dev", "MyApp")
+-   All values come from the JSON file via `--dart-define-from-file`: NO hardcoded per-flavor logic in Dart code
+-   NEVER put secrets in the JSON config files: use `flutter_secure_storage` or CI-injected env vars
 
 # Platform-Specific Flavor Setup
 
@@ -113,4 +113,4 @@ flutter build ipa --flavor prod --dart-define-from-file=config/prod.json --relea
 -   NEVER commit production secrets to the repository
 -   Every team member MUST be able to run any flavor locally with a single command
 -   CI/CD pipelines MUST specify both `--flavor` and `--dart-define-from-file` explicitly
--   Use a single `main.dart` — NEVER create separate entry points per flavor
+-   Use a single `main.dart`: NEVER create separate entry points per flavor

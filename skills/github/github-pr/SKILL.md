@@ -1,6 +1,6 @@
 ---
 name: github-pr
-description: Automate Pull Request creation with proper titles, descriptions, labels, and quality checks using the GitHub CLI. Use when preparing code for review and merge.
+description: Use when opening, formatting, and standardizing Pull Requests with GitHub CLI gh commands, PR templates, and review checklists.
 metadata:
     platforms: "cross-platform"
     languages: "generic"
