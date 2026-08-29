@@ -1,6 +1,6 @@
 ---
 name: dart-use-pattern-matching
-description: Leverage switch expressions and Dart 3+ pattern matching to build clean, exhaustive, and type-safe control flows for algebraic data types, JSON parsing, and variable destructuring.
+description: Use when implementing switch expressions, relational patterns, object destructuring, or exhaustive sealed class handling.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -88,7 +88,7 @@ void processPayload(Map<String, dynamic> payload) {
 
 ### Exhaustive Sealed Class Matching
 
-Leverage sealed classes to force exhaustive compile-time verification when executing domain logic.
+Use sealed classes to force exhaustive compile-time verification when executing domain logic.
 
 ```dart
 sealed class NetworkState {}

@@ -1,6 +1,6 @@
 ---
 name: dart-run-static-analysis
-description: Configure project linter rules, configure `analysis_options.yaml`, enforce strict static type checking, and manage fine-grained file or line-level diagnostic suppressions.
+description: Use when configuring analysis_options.yaml, enabling strict type checks, or managing linter rules and diagnostics.
 metadata:
     platforms: "dart"
     languages: "dart"

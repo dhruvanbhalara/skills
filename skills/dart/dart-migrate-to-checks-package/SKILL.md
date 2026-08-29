@@ -1,6 +1,6 @@
 ---
 name: dart-migrate-to-checks-package
-description: Migrate test suites from legacy `package:matcher` (using `expect()`) to the modern, fluent, and highly descriptive assertions of `package:checks`.
+description: Use when migrating test assertions from legacy package:matcher expect() syntax to package:checks fluent assertions.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -112,7 +112,7 @@ class Account {
 }
 
 void badTest() {
-  final account = Account('alice@test.com', ['admin', 'premium']);
+  final account = Account('alice@test.com', ['admin', 'tier1']);
 
   expect(account.email, equals('alice@test.com'));
   expect(account.tags, contains('admin'));
@@ -123,7 +123,7 @@ void badTest() {
 import 'package:checks/checks.dart';
 
 void goodTest() {
-  final account = Account('alice@test.com', ['admin', 'premium']);
+  final account = Account('alice@test.com', ['admin', 'tier1']);
 
   // Chain validations cleanly using cascades and property extractors
   check(account)

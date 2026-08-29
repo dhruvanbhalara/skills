@@ -1,6 +1,6 @@
 ---
 name: dart-tooling
-description: Run Dart tooling workflows for static analysis, dependency conflict resolution, and test migration to package:checks. Use when fixing analyzer errors, resolving pub dependency conflicts, or modernizing test assertions.
+description: Use when diagnosing package dependency conflicts, running build_runner, or managing Dart SDK tooling commands.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -47,7 +47,7 @@ dart pub outdated
 - The `dart pub` package management command natively supports Git Large File Storage (LFS). Dependencies fetched from Git repositories that contain LFS objects (e.g. assets, binaries, models) resolve automatically without requiring local configuration.
 
 ### Version Constraint Best Practices
--   **Use Caret Syntax**: Always use `^1.2.3` — allows non-breaking updates up to next major version.
+-   **Use Caret Syntax**: Always use `^1.2.3` - allows non-breaking updates up to next major version.
 -   **Tighten Dev Dependencies**: Set lower bounds to exact current version for `dev_dependencies`.
 -   **CI Reproducibility**: Use `dart pub get --enforce-lockfile` in CI to ensure exact tested versions.
 
@@ -72,7 +72,7 @@ dart pub upgrade --tighten  # Auto-update lower bounds in pubspec.yaml
 Instead, remove ONLY the conflicting package's block:
 1.  Open `pubspec.lock`.
 2.  Find and delete ONLY the conflicting package's YAML block.
-3.  Run `dart pub get` — fetches newest compatible version for that package only.
+3.  Run `dart pub get`: fetches newest compatible version for that package only.
 4.  Verify: `dart pub deps` → check dependency graph resolves correctly.
 
 ### Temporary Overrides (Last Resort)

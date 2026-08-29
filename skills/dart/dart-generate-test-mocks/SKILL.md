@@ -1,6 +1,6 @@
 ---
 name: dart-generate-test-mocks
-description: Define and generate mock objects for external dependencies using `package:mockito` and the `build_runner` code generation lifecycle for unit testing classes.
+description: Use when generating mock objects with package:mockito and build_runner, or choosing between mocktail and mockito.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -8,12 +8,22 @@ metadata:
 ---
 
 ## Contents
+- [Mock Framework Selection](#mock-framework-selection)
 - [Structuring Code for Testability](#structuring-code-for-testability)
 - [Managing Dev Dependencies](#managing-dev-dependencies)
 - [Generating Mock Files](#generating-mock-files)
 - [Stubbing and Verification Best Practices](#stubbing-and-verification-best-practices)
 - [Workflow: Generating Mocks and Validating Tests](#workflow-generating-mocks-and-validating-tests)
 - [Examples](#examples)
+
+## Mock Framework Selection
+
+| Criteria | `mocktail` (Recommended) | `mockito` |
+|---|---|---|
+| **Code Generation** | None required | Requires `build_runner` |
+| **Setup Overhead** | Minimal (`class MockService extends Mock implements Service {}`) | Annotation + generator build step |
+| **Type Safety** | Runtime verification | Compile-time generated mock classes |
+| **Complex APIs** | Manual fallback values (`registerFallbackValue`) | Automated `@GenerateNiceMocks` handling |
 
 ## Structuring Code for Testability
 
@@ -38,7 +48,7 @@ Configure your `pubspec.yaml` to specify the packages required for code generati
 
 ## Generating Mock Files
 
-Leverage `package:mockito` alongside `build_runner` to generate mock structures automatically:
+Use `package:mockito` alongside `build_runner` to generate mock structures automatically:
 
 - **GenerateNiceMocks**: Always use the `@GenerateNiceMocks` annotation instead of the legacy `@GenerateMocks`. Nice mocks automatically return null or matching default values instead of throwing "MissingStubException" when a method is invoked without a pre-configured stub.
 - **MockSpec Configuration**: Annotate your test file's entry point with `@GenerateNiceMocks([MockSpec<YourService>()])`.
@@ -50,7 +60,7 @@ Leverage `package:mockito` alongside `build_runner` to generate mock structures 
 
 ## Stubbing and Verification Best Practices
 
-Write robust mock interactions by adhering to these guidelines:
+Write reliable mock interactions by adhering to these guidelines:
 
 - **Future and Stream Stubbing**: When stubbing methods that return a `Future` or a `Stream`, **always** use `.thenAnswer((_) async => value)`. Never use `.thenReturn()` for asynchronous return values, as this causes runtime cast errors.
 - **Invocation Tracking**: Use the `verify()` API to verify that specific methods were invoked. Call `.called(number)` to assert precise invocation counts.

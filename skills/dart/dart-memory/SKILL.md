@@ -1,6 +1,6 @@
 ---
 name: dart-memory
-description: Manage memory efficiently in Dart and Flutter apps to prevent leaks and reduce GC pressure. Use when disposing resources, handling large assets, optimizing image caching, or profiling allocation patterns.
+description: Use when troubleshooting memory leaks, optimizing garbage collection overhead, or disposing streams and listeners in Dart.
 metadata:
     platforms: "cross-platform, mobile"
     languages: "dart"

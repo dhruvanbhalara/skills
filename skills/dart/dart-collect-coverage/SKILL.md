@@ -1,6 +1,6 @@
 ---
 name: dart-collect-coverage
-description: Collect test coverage, generate LCOV/HTML reports, and apply coverage ignore directives. Use when measuring test coverage, setting up coverage gates in CI, or generating coverage reports for Dart and Flutter projects.
+description: Use when measuring test coverage, generating LCOV or HTML reports, or filtering coverage files.
 metadata:
     platforms: "dart, flutter"
     languages: "dart"
@@ -44,7 +44,7 @@ This automatically:
 2.  Collects JSON coverage from the Dart VM
 3.  Formats into LCOV report at `coverage/lcov.info`
 
-**Monorepo support** — specify test directories explicitly:
+**Monorepo support**: specify test directories explicitly:
 ```bash
 dart run coverage:test_with_coverage -- pkgs/foo/test pkgs/bar/test
 ```
@@ -102,8 +102,8 @@ dart run coverage:collect_coverage \
 ```
 
 Optional flags:
--   `--function-coverage` — function-level metrics (Dart VM 2.17.0+)
--   `--branch-coverage` — branch-level metrics (Dart VM 2.17.0+)
+-   `--function-coverage`: function-level metrics (Dart VM 2.17.0+)
+-   `--branch-coverage`: branch-level metrics (Dart VM 2.17.0+)
 
 ### 3. Format to LCOV
 ```bash
@@ -178,7 +178,7 @@ class GeneratedRoutes {
 - [ ] **Step 3**: Validate `coverage/lcov.info` exists.
 - [ ] **Step 4**: Filter generated code: `lcov --remove ... '*.g.dart' '*.freezed.dart'`.
 - [ ] **Step 5**: Generate HTML: `genhtml coverage/lcov.info -o coverage/html`.
-- [ ] **Step 6**: Review uncovered files — add tests or `// coverage:ignore-file`.
+- [ ] **Step 6**: Review uncovered files: add tests or `// coverage:ignore-file`.
 - [ ] **Step 7**: Add coverage gate to CI pipeline (80% minimum).
 
 ## Examples

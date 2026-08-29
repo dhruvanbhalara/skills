@@ -1,6 +1,6 @@
 ---
 name: dart-genkit
-description: Guide for utilizing the Genkit Dart SDK to build full-stack, AI-powered agentic applications.
+description: Use when building AI workflows, tool calling agents, structured outputs, or LLM pipelines using the Genkit Dart SDK.
 metadata:
     platforms: "dart"
     languages: "dart"

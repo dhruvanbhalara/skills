@@ -1,6 +1,6 @@
 ---
 name: dart-logic-patterns
-description: Apply efficient algorithms, data structures, and Dart 3 pattern matching for clean business logic. Use when implementing search, sorting, debouncing, memoization, or exhaustive control flow in domain layers.
+description: Use when organizing business logic, implementing algorithmic workflows, or applying Dart data structures and pattern matching.
 metadata:
     platforms: "dart"
     languages: "dart"

@@ -1,6 +1,6 @@
 ---
 name: dart-modern-syntax
-description: Guide for utilizing Dart 3.0+ up to 3.12 syntax updates (private named parameters, extension types, records, pattern matching, wildcard variables, and primary constructors).
+description: Use when applying Dart 3.0 to 3.12+ syntax features including private named parameters, extension types, records, and wildcards.
 metadata:
     platforms: "dart"
     languages: "dart"
@@ -9,7 +9,7 @@ metadata:
 
 # Modern Dart Syntax (Dart 3.0 - 3.12+)
 
-Leverage the latest syntax features introduced in Dart 3.x to write clean, concise, type-safe, and highly optimized code.
+Use the latest syntax features introduced in Dart 3.x to write clean, concise, type-safe, and highly optimized code.
 
 ## Contents
 - [Private Named Parameters](#private-named-parameters)
