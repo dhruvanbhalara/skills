@@ -1,6 +1,6 @@
 ---
 name: flutter-dio
-description: Implement HTTP networking with Dio including interceptors, retry logic, and response caching. Use when building API clients, configuring authentication headers, or handling network errors gracefully.
+description: Use when configuring HTTP network clients with Dio, adding auth token interceptors, handling retry logic, or caching API responses.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -24,7 +24,7 @@ metadata:
 
 # Repository Pattern
 
--   DataSources contain only raw Dio API calls — no business logic or mapping
+-   DataSources contain only raw Dio API calls: no business logic or mapping
 -   Repositories orchestrate between remote DataSources and local cache for network data
 
 # Retry & Resilience
@@ -40,7 +40,7 @@ metadata:
 
 # Security
 
--   Store tokens via `flutter_secure_storage` — never in source code or `SharedPreferences`
+-   Store tokens via `flutter_secure_storage`: never in source code or `SharedPreferences`
 -   All API communication MUST use HTTPS
 
 # Alternative: http Package

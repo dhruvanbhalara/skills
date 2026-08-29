@@ -1,6 +1,6 @@
 ---
 name: flutter-add-widget-preview
-description: Add interactive widget previews using the @Preview annotation system. Use when creating new UI components, verifying designs in isolation, or testing visual states without running the full app.
+description: Use when configuring widget previews in Flutter development, testing visual component variations, or isolating widget UI states.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -26,7 +26,7 @@ Use the Flutter Widget Previewer to render widgets in real-time, isolated from t
 -   **Import**: Always import `package:flutter/widget_previews.dart`.
 -   **Multiple Configurations**: Apply multiple `@Preview` annotations to a single target for multiple preview instances (e.g., light/dark mode).
 -   **Naming**: Use `name` and `group` parameters for organized preview panels.
--   **Sizing**: Apply explicit constraints using the `size` parameter if the widget is unconstrained — the previewer defaults to approximately half the viewport.
+-   **Sizing**: Apply explicit constraints using the `size` parameter if the widget is unconstrained (the previewer defaults to approximately half the viewport).
 
 ## Handling Limitations
 
@@ -129,7 +129,7 @@ Widget userCard() => const Card(
 - [ ] **Step 3**: Apply `@Preview` annotation with `name`, `group`, `size` params.
 - [ ] **Step 4**: If config is reused across widgets → extract into custom `Preview` subclass.
 - [ ] **Step 5**: Launch previewer (IDE tab or `flutter widget-preview start`).
-- [ ] **Step 6**: Iterate — modify widget → observe auto-update → fix errors → repeat.
+- [ ] **Step 6**: Iterate: modify widget → observe auto-update → fix errors → repeat.
 
 ## Examples
 

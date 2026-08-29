@@ -1,6 +1,6 @@
 ---
 name: flutter-firebase
-description: Integrate Firebase services including Authentication, Firestore, Cloud Messaging, Crashlytics, and Analytics. Use when adding backend capabilities, push notifications, crash reporting, or remote configuration to a Flutter app.
+description: Use when integrating Firebase Authentication, Cloud Firestore, Cloud Messaging, Crashlytics, or Firebase Analytics in Flutter.
 metadata:
     platforms: "flutter, android, ios"
     languages: "dart"
@@ -9,7 +9,7 @@ metadata:
 
 # Firebase Setup
 
--   Use `firebase_core` for initialization — call `Firebase.initializeApp()` before `runApp()`
+-   Use `firebase_core` for initialization: call `Firebase.initializeApp()` before `runApp()`
 -   Use `flutterfire configure` for platform-specific setup
 -   Use separate Firebase projects per flavor (see `app-config` skill)
 -   Register Firebase services via `injectable` for consistent DI
@@ -17,10 +17,10 @@ metadata:
 # Authentication
 
 -   Use `firebase_auth` for user management
--   Wrap all auth calls in an `AuthRepository` — no direct `FirebaseAuth` usage in BLoCs or UI
+-   Wrap all auth calls in an `AuthRepository`: no direct `FirebaseAuth` usage in BLoCs or UI
 -   Support email/password, Google Sign-In, and Apple Sign-In at minimum
 -   Handle auth state changes via `FirebaseAuth.instance.authStateChanges()` stream in `AuthBloc`
--   Store auth tokens via `flutter_secure_storage` — never in `SharedPreferences` or source code
+-   Store auth tokens via `flutter_secure_storage`: never in `SharedPreferences` or source code
 -   Implement proper sign-out: clear local cache, navigate to login, dispose user-specific BLoCs
 
 # Firestore
@@ -29,13 +29,13 @@ metadata:
 -   DataSources wrap all Firestore calls (`get`, `set`, `update`, `delete`, `snapshots`)
 -   Use typed model classes with `fromFirestore` / `toFirestore` factory methods
 -   Prefer `.withConverter<T>()` for type-safe collection references
--   Use batch writes for multi-document operations — never multiple sequential writes
+-   Use batch writes for multi-document operations: never multiple sequential writes
 -   Implement offline persistence (enabled by default on mobile)
 
 ## Security Rules
 
--   NEVER rely on client-side validation alone — enforce rules in Firestore Security Rules
--   Default deny: start with `allow read, write: if false;` and open only what's needed
+-   NEVER rely on client-side validation alone: enforce rules in Firestore Security Rules
+-   Default deny: start with `allow read, write: if false;` and open only what is needed
 -   Always validate `request.auth != null` for authenticated-only collections
 -   Test rules with the Firebase Emulator Suite before deploying
 
@@ -50,7 +50,7 @@ metadata:
 # Crashlytics
 
 -   Use `firebase_crashlytics` for crash reporting
--   Enable in staging and production flavors only — disable in dev
+-   Enable in staging and production flavors only: disable in dev
 -   Record Flutter errors: `FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError`
 -   Catch async errors via `PlatformDispatcher.instance.onError`
 -   Add custom keys for user context: `Crashlytics.instance.setCustomKey('userId', id)`
@@ -59,13 +59,13 @@ metadata:
 
 -   Use `firebase_analytics` for user behavior tracking
 -   Log meaningful events with descriptive names: `analytics.logEvent(name: 'purchase_completed')`
--   Set user properties for segmentation: `analytics.setUserProperty(name: 'plan', value: 'premium')`
+-   Set user properties for segmentation: `analytics.setUserProperty(name: 'plan', value: 'pro')`
 -   Track screen views via `FirebaseAnalyticsObserver` in `GoRouter`
 -   NEVER log PII (emails, passwords, phone numbers) in analytics events
 
 # Remote Config
 
 -   Use `firebase_remote_config` for feature flags and A/B testing
--   Set sensible defaults locally — app MUST work without Remote Config fetched
+-   Set sensible defaults locally: app MUST work without Remote Config fetched
 -   Fetch and activate on app start with a timeout fallback
 -   Cache values and respect minimum fetch intervals to avoid throttling

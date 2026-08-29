@@ -1,6 +1,6 @@
 ---
 name: flutter-apply-architecture-best-practices
-description: Enforce Clean Architecture with BLoC pattern for Flutter applications. Use when scaffolding features, structuring data/domain/presentation layers, defining data models, or integrating native platform channels.
+description: Use when structuring Flutter application layers across data, domain, and presentation using Clean Architecture and BLoC.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -93,7 +93,7 @@ Response → Repository (map to Domain Entity) → BLoC (emit Success/Error) →
 -   Use `EventChannel` for continuous streams from native to Flutter (e.g., sensor data, connectivity changes)
 -   Place all channel code in a dedicated `platform/` directory within the relevant feature
 -   Define channel names as constants: `static const channel = MethodChannel('com.app.feature/method')`
--   Wrap all channel calls in a DataSource — never call `MethodChannel` directly from BLoC or UI
+-   Wrap all channel calls in a DataSource: never call `MethodChannel` directly from BLoC or UI
 -   Handle `MissingPluginException` gracefully for platforms that don't implement the channel
 -   Use `defaultTargetPlatform` checks to guard platform-specific behavior
 

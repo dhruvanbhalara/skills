@@ -1,6 +1,6 @@
 ---
 name: flutter-implement-json-serialization
-description: Create model classes with fromJson/toJson using dart:convert and Dart 3 pattern matching. Use when manually mapping JSON to classes, parsing HTTP responses, or choosing between manual and code-generated serialization.
+description: Use when writing manual JSON serializers with dart:convert and Dart pattern matching or automating model serialization.
 metadata:
     platforms: "flutter, dart"
     languages: "dart"
@@ -144,8 +144,8 @@ Future<List<User>> fetchUsers(http.Client client) async {
 - [ ] **Step 2**: Implement `factory Model.fromJson(Map<String, dynamic> json)` using pattern matching.
 - [ ] **Step 3**: Implement `Map<String, dynamic> toJson()` method.
 - [ ] **Step 4**: Write unit tests for serialization round-trip (`fromJson(toJson(model)) == model`).
-- [ ] **Step 5**: Run tests — `dart test` or `flutter test`.
-- [ ] **Step 6**: Feedback Loop — fix type mismatch errors → re-run until green.
+- [ ] **Step 5**: Run tests: `dart test` or `flutter test`.
+- [ ] **Step 6**: Feedback Loop: fix type mismatch errors → re-run until green.
 
 ## Workflow: Fetching and Parsing JSON
 

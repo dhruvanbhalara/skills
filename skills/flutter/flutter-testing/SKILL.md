@@ -1,6 +1,6 @@
 ---
 name: flutter-testing
-description: Define testing strategy, test pyramid, and pattern-based conventions (Golden Variants, State Matrix, Interaction Contracts). Use when establishing test architecture or choosing the right testing approach for a Flutter project.
+description: Use when defining automated testing strategies, organizing test pyramids, or establishing test naming conventions across Flutter apps.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -47,9 +47,9 @@ Every stateful widget MUST be tested against ALL possible UI states. Use a state
 ## Interaction Contract Testing
 Reusable widgets have implicit behavioral rules. Define these as explicit, reusable contracts:
 -   Create helper functions in `test/utils/` for common contracts:
-    -   `verifyTappable(tester, finder, mockCallback)` — Tap fires callback exactly once.
-    -   `verifyDisabledNotTappable(tester, finder, mockCallback)` — Tap does NOT fire callback when disabled.
-    -   `verifyValidatesOnBlur(tester, finder)` — Validation triggers when focus leaves.
+    -   `verifyTappable(tester, finder, mockCallback)`: Tap fires callback exactly once.
+    -   `verifyDisabledNotTappable(tester, finder, mockCallback)`: Tap does NOT fire callback when disabled.
+    -   `verifyValidatesOnBlur(tester, finder)`: Validation triggers when focus leaves.
 -   Apply contracts consistently across all widgets sharing the same behavior.
 -   **When to use**: Widgets with strictly defined behavioral rules that must hold across refactors.
 -   **When NOT to use**: One-off logic unique to a single widget.
@@ -62,15 +62,15 @@ Reusable widgets have implicit behavioral rules. Define these as explicit, reusa
 
 # Common Test Errors
 
--   `A RenderFlex overflowed...` — Wrap widget in `Expanded` or constrain dimensions in test
--   `Vertical viewport was given unbounded height` — Wrap `ListView` in `SizedBox` with fixed height in test
--   `setState called during build` — Defer state changes to post-frame callback
--   `No MediaQuery widget ancestor` — Always wrap test widget in `MaterialApp`
+-   `A RenderFlex overflowed...`: Wrap widget in `Expanded` or constrain dimensions in test
+-   `Vertical viewport was given unbounded height`: Wrap `ListView` in `SizedBox` with fixed height in test
+-   `setState called during build`: Defer state changes to post-frame callback
+-   `No MediaQuery widget ancestor`: Always wrap test widget in `MaterialApp`
 
 # Running Tests (Quick Reference)
 
--   `flutter test` — Run all unit and widget tests
--   `flutter test test/path/to/file_test.dart` — Run specific test file
--   `flutter test integration_test/` — Run integration tests
--   `flutter test --coverage` — Run with coverage report
--   `dart test` — Pure Dart unit tests
+-   `flutter test`: Run all unit and widget tests
+-   `flutter test test/path/to/file_test.dart`: Run specific test file
+-   `flutter test integration_test/`: Run integration tests
+-   `flutter test --coverage`: Run with coverage report
+-   `dart test`: Pure Dart unit tests

@@ -1,6 +1,6 @@
 ---
 name: flutter-devtools
-description: Guide for utilizing Flutter DevTools, using visual debugging properties, and exposing custom widget states to the inspector.
+description: Use when profiling CPU performance, tracking memory leaks, inspecting widget trees, or viewing network traffic in Flutter DevTools.
 metadata:
     platforms: "flutter"
     languages: "dart"

@@ -1,6 +1,6 @@
 ---
 name: flutter-setup-declarative-routing
-description: Configure `MaterialApp.router` using a package like `go_router` for advanced URL-based navigation. Use when developing web applications or mobile apps that require specific deep linking and browser history support.
+description: Use when setting up deep linking, URL-based routing, ShellRoute navigation hierarchies, or route guards with GoRouter.
 metadata:
     platforms: "flutter"
     languages: "dart"

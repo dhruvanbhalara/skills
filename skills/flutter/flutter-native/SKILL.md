@@ -1,6 +1,6 @@
 ---
 name: flutter-native
-description: Build type-safe native platform integrations using MethodChannels, EventChannels, and Pigeon. Use when communicating with Android/iOS native code, implementing federated plugins, or bridging platform-specific APIs.
+description: Use when creating platform channels with MethodChannel, EventChannel, or type-safe bindings with Pigeon for iOS and Android.
 metadata:
     platforms: "flutter, android, ios"
     languages: "dart, kotlin, swift"
@@ -51,11 +51,11 @@ Organize native code within the relevant feature if possible, or use a dedicated
 ## 5. Swift Package Manager (SPM) Defaults
 *Introduced in Flutter 3.44*
 - For iOS/macOS native integrations, SPM is the default package manager. It replaces CocoaPods entirely for new configurations.
-- Declare Swift Packages directly in your plugin's `pubspec.yaml` using the `swift_packages` field, or configure them directly via Xcode workspaces (see [flutter-spm](file:///Users/dhruvanbhalara/Desktop/Github%20Projects/skills/skills/flutter/flutter-spm/SKILL.md)).
+- Declare Swift Packages directly in your plugin's `pubspec.yaml` using the `swift_packages` field, or configure them directly via Xcode workspaces (see [flutter-spm](../flutter-spm/SKILL.md)).
 
 ## 6. Platform View Overhaul
 *Introduced in Flutter 3.44*
-- Embedded native views (such as maps, web views, cameras) leverage an overhauled hybrid composition rendering pipeline to minimize dropped frames and eliminate UI compositing performance issues.
+- Embedded native views (such as maps, web views, cameras) use an overhauled hybrid composition rendering pipeline to minimize dropped frames and eliminate UI compositing performance issues.
 
 ## 7. Federated Plugins
 

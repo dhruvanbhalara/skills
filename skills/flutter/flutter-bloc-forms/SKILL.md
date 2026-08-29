@@ -1,6 +1,6 @@
 ---
 name: flutter-bloc-forms
-description: Manage form state, validation, and input handling through dedicated FormBlocs. Use when building forms with real-time validation, multi-step flows, or complex input patterns like search debouncing.
+description: Use when managing complex form state, synchronous and asynchronous input validation, or form submission transitions in BLoC.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -9,16 +9,16 @@ metadata:
 
 # Form Architecture with BLoC
 
--   Manage form state in a dedicated `FormBloc` — NOT in widget `setState`
+-   Manage form state in a dedicated `FormBloc` (not in widget `setState`)
 -   Each form field maps to a property in the BLoC state
 -   Validate on field change (real-time) or on submit (batch) depending on UX requirements
 -   Emit `FormSubmitting`, `FormSuccess`, `FormError` states for submission flow
 
 ## Form Events
 
--   `FieldChanged(field, value)` — update a single field in state
--   `FormSubmitted` — trigger validation and submission
--   `FormReset` — clear all fields and errors
+-   `FieldChanged(field, value)`: update a single field in state
+-   `FormSubmitted`: trigger validation and submission
+-   `FormReset`: clear all fields and errors
 
 ## Form State
 
@@ -26,18 +26,18 @@ metadata:
     ```dart
     sealed class FormStatus { initial, submitting, success, failure }
     ```
--   Field errors: `Map<String, String?>` keyed by field name — `null` means valid
+-   Field errors: `Map<String, String?>` keyed by field name (`null` means valid)
 
 # Validation Patterns
 
--   Validate in the domain layer — NOT in widgets or BLoCs
+-   Validate in the domain layer (not in widgets or BLoCs)
 -   Create pure validator functions that return `String?` (null = valid, string = error message):
     ```dart
     String? validateEmail(String value) =>
       value.contains('@') ? null : 'Invalid email';
     ```
 -   Compose validators: `String? validate(String v) => validateRequired(v) ?? validateEmail(v)`
--   Use localized error messages via `context.l10n` — no hardcoded validation strings
+-   Use localized error messages via `context.l10n`: no hardcoded validation strings
 
 # Input Widgets
 
@@ -51,13 +51,13 @@ metadata:
 
 # Controller Lifecycle
 
--   Declare `TextEditingController` as `late final` in `initState()` — dispose in `dispose()`
+-   Declare `TextEditingController` as `late final` in `initState()`: dispose in `dispose()`
 -   Sync controllers to BLoC via `onChanged` callback or controller listener
 
 # Form Submission
 
 -   Disable submit button while `FormStatus.submitting` to prevent double-submission
--   Show inline field errors below each field — not just a top-level error
+-   Show inline field errors below each field (not just a top-level error)
 -   On success: navigate, show success feedback, and reset form if staying on same page
 -   On failure: show error feedback via `SnackBar` or inline, keep form data intact
 

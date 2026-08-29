@@ -1,6 +1,6 @@
 ---
 name: flutter-bloc
-description: Implement state management using the BLoC/Cubit pattern with injectable dependency injection. Use when creating new BLoCs, managing UI state transitions, or configuring navigation with GoRouter.
+description: Use when implementing state management with sealed BLoC classes, registering dependency injection with injectable, or setting up GoRouter listeners.
 metadata:
     platforms: "flutter"
     languages: "dart"

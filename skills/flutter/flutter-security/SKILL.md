@@ -1,6 +1,6 @@
 ---
 name: flutter-security
-description: Enforce architect-level security standards including AES-256-GCM encryption, secure storage, biometric gates, and memory safety. Use when handling sensitive data, credentials, clipboard content, or API communication security.
+description: Use when securing local storage with flutter_secure_storage, enforcing AES-256-GCM encryption, or adding biometric authentication gates.
 metadata:
     platforms: "flutter, mobile"
     languages: "dart"

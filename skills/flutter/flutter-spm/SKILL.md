@@ -1,6 +1,6 @@
 ---
 name: flutter-spm
-description: Guide for integrating, configuring, and caching dependencies using Swift Package Manager (SPM) in Flutter iOS/macOS applications.
+description: Use when migrating iOS and macOS Flutter plugin dependencies from CocoaPods to Swift Package Manager (SPM).
 metadata:
     platforms: "flutter, ios, macOS"
     languages: "swift, dart"

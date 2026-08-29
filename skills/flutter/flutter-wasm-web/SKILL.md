@@ -1,6 +1,6 @@
 ---
 name: flutter-wasm-web
-description: Best practices for compiling, optimizing, and deploying Flutter Web applications to WebAssembly (Wasm-GC) using modern JS interop.
+description: Use when building, optimizing, and deploying Flutter Web applications targeting WebAssembly (Wasm-GC) with modern JS interop.
 metadata:
     platforms: "flutter, web"
     languages: "dart, javascript"

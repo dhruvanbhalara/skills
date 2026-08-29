@@ -1,6 +1,6 @@
 ---
 name: flutter-isar
-description: Implement local data persistence with Isar database and offline-first architecture. Use when building cache-first data strategies, reactive queries, schema migrations, or secure local storage with flutter_secure_storage.
+description: Use when configuring local persistence with Isar NoSQL database, defining schemas, or executing reactive queries in Flutter.
 metadata:
     platforms: "flutter"
     languages: "dart"
@@ -16,11 +16,11 @@ metadata:
 
 ## Schema Design
 
--   Keep collections focused — one collection per domain entity
+-   Keep collections focused: one collection per domain entity
 -   Use `@Index` annotations for fields queried frequently
 -   Use `@enumerated` for enum fields
 -   Use `Links` and `Backlinks` for relationships between collections
--   NEVER store derived/computed values — compute them in the domain layer
+-   NEVER store derived/computed values: compute them in the domain layer
 
 ## Migrations
 
