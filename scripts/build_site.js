@@ -17,12 +17,25 @@ const SKILLS_DIR = path.join(__dirname, '../skills');
 const OUTPUT_DIR = path.join(__dirname, '../_site');
 const SITE_URL = 'https://dhruvanbhalara.github.io/skills';
 
-// Helper to capitalize IDs
+// Helper to capitalize IDs and strings cleanly
 function toTitleCase(str) {
   if (!str) return '';
   return str
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => {
+      const lower = word.toLowerCase();
+      if (lower === 'cli') return 'CLI';
+      if (lower === 'api') return 'API';
+      if (lower === 'ui') return 'UI';
+      if (lower === 'json') return 'JSON';
+      if (lower === 'spm') return 'SPM';
+      if (lower === 'wasm') return 'WASM';
+      if (lower === 'dio') return 'Dio';
+      if (lower === 'isar') return 'Isar';
+      if (lower === 'bloc') return 'BLoC';
+      if (lower === 'pr') return 'PR';
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
     .join(' ');
 }
 
@@ -113,6 +126,9 @@ function getBaseStyles() {
       padding: 0 2rem;
     }
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
       font-weight: 800;
       font-size: 1.1rem;
       color: var(--text);
@@ -120,6 +136,15 @@ function getBaseStyles() {
       letter-spacing: -0.5px;
       text-transform: uppercase;
     }
+    .logo-glyph {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 10px var(--primary-glow);
+      display: inline-block;
+    }
+    .logo-text { color: var(--text); }
     .nav-links { display: flex; align-items: center; gap: 1.5rem; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; font-size: 0.9rem; }
     .nav-links a:hover { color: var(--text); }
@@ -145,6 +170,20 @@ function getBaseStyles() {
     .hero-text {
       display: flex;
       flex-direction: column;
+    }
+    .hero-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-saffron-spark);
+      background: rgba(255, 184, 41, 0.1);
+      border: 1px solid rgba(255, 184, 41, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.25rem;
     }
     .hero-visual {
       position: relative;
@@ -267,7 +306,9 @@ function getBaseStyles() {
       letter-spacing: 0.5px;
       border: 1px solid var(--border);
     }
-    .badge.platform { border-color: rgba(128, 82, 255, 0.3); color: var(--primary); opacity: 1; }
+    .badge.platform[data-platform="flutter"] { border-color: rgba(21, 132, 110, 0.4); color: var(--color-deep-verdant); }
+    .badge.platform[data-platform="dart"] { border-color: rgba(128, 82, 255, 0.4); color: var(--color-electric-iris); }
+    .badge.category { background: rgba(255, 184, 41, 0.1); color: var(--color-saffron-spark); border-color: rgba(255, 184, 41, 0.25); }
 
     /* Filters */
     .filter-container {
@@ -488,7 +529,10 @@ function getThemeScript() {
             const category = (card.getAttribute('data-category') || '').toLowerCase();
 
             const matchesSearch = !query || title.includes(query) || desc.includes(query) || platforms.includes(query) || category.includes(query);
-            const matchesCategory = activeCategory === 'all' || platforms.includes(activeCategory) || category === activeCategory;
+            const matchesCategory = activeCategory === 'all' ||
+              platforms.includes(activeCategory) ||
+              category.includes(activeCategory) ||
+              (activeCategory === 'github' && (platforms.includes('git') || category.includes('git')));
 
             if (matchesSearch && matchesCategory) {
               card.style.display = 'flex';
@@ -630,6 +674,22 @@ function generateIndexPage(skills) {
   const title = "Agent Skills Library: The Directory for AI Agents";
   const description = "Documentation library for professional coding agent skills. Built for Antigravity, Copilot, and Cursor.";
 
+  const flutterCount = skills.filter(s =>
+    (s.platforms || []).some(p => p.toLowerCase() === 'flutter') ||
+    (s.languages || []).some(l => l.toLowerCase() === 'flutter')
+  ).length;
+
+  const dartCount = skills.filter(s =>
+    (s.platforms || []).some(p => p.toLowerCase() === 'dart') ||
+    (s.languages || []).some(l => l.toLowerCase() === 'dart')
+  ).length;
+
+  const githubCount = skills.filter(s =>
+    (s.platforms || []).some(p => p.toLowerCase() === 'github' || p.toLowerCase() === 'git') ||
+    (s.category || '').toLowerCase().includes('github') ||
+    s.id.startsWith('github') || s.id.startsWith('git')
+  ).length;
+
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -637,7 +697,7 @@ function generateIndexPage(skills) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     ${getMetaTags(title, description)}
     <style>${getBaseStyles()}</style>
     <script>${getThemeScript()}</script>
@@ -645,34 +705,43 @@ function generateIndexPage(skills) {
 <body>
     <nav>
         <div class="nav-content">
-            <a href="/" class="logo">Agent Skills</a>
+            <a href="/" class="logo">
+                <span class="logo-glyph"></span>
+                <span class="logo-text">Agent Skills</span>
+            </a>
             <div class="nav-links">
-                <button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button>
-                <a href="https://github.com/dhruvanbhalara/skills" target="_blank">GITHUB</a>
+                <button class="theme-btn" onclick="toggleTheme()" id="theme-icon" aria-label="Toggle theme">🌙</button>
+                <a href="https://github.com/dhruvanbhalara/skills" target="_blank" rel="noopener">GITHUB</a>
             </div>
         </div>
     </nav>
 
     <header>
-        <h1>Agent Skills</h1>
-        <div class="subtitle">by Dhruvan Bhalara</div>
-
-        <div class="install-box">
-            <span>npx skills add dhruvanbhalara/skills</span>
-            <button onclick="navigator.clipboard.writeText('npx skills add dhruvanbhalara/skills').then(() => { this.innerText = 'Copied!'; setTimeout(() => this.innerText = 'Copy', 2000); })">Copy</button>
+        <div class="hero-grid">
+            <div class="hero-text">
+                <span class="hero-badge">${skills.length} Specialized Coding Agent Skills</span>
+                <h1>Agent Skills</h1>
+                <div class="subtitle">Curated engineering standards and workflows for AI agents.</div>
+                <div class="install-box">
+                    <span>npx skills add dhruvanbhalara/skills</span>
+                    <button onclick="navigator.clipboard.writeText('npx skills add dhruvanbhalara/skills').then(() => { this.innerText = 'Copied!'; setTimeout(() => this.innerText = 'Copy', 2000); })">Copy</button>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <canvas id="constellation-canvas"></canvas>
+            </div>
         </div>
     </header>
 
     <div class="search-container">
-        <input type="text" id="search-input" placeholder="Search skills (e.g., 'optimization', 'bloc', 'git')...">
+        <input type="text" id="search-input" placeholder="Search ${skills.length} skills (e.g. 'bloc', 'testing', 'git')... [/ to focus]">
     </div>
 
     <div class="filter-container">
-        <button class="filter-btn active" data-platform="all">All Platforms</button>
-        <button class="filter-btn" data-platform="flutter">Flutter</button>
-        <button class="filter-btn" data-platform="android">Android</button>
-        <button class="filter-btn" data-platform="ios">iOS</button>
-        <button class="filter-btn" data-platform="cross-platform">Cross-Platform</button>
+        <button class="filter-btn active" data-platform="all">All (${skills.length})</button>
+        <button class="filter-btn" data-platform="flutter">Flutter (${flutterCount})</button>
+        <button class="filter-btn" data-platform="dart">Dart (${dartCount})</button>
+        <button class="filter-btn" data-platform="github">GitHub (${githubCount})</button>
     </div>
 
     <main>
@@ -681,17 +750,22 @@ function generateIndexPage(skills) {
                 <a href="${skill.id}.html" class="card"
                    data-title="${skill.title}"
                    data-desc="${skill.description}"
-                   data-platforms="${(skill.platforms || []).join(',')}"
+                   data-platforms="${[...(skill.platforms || []), ...(skill.languages || [])].join(',')}"
                    data-category="${skill.category || ''}">
                     <div class="badges">
-                        ${(skill.platforms || []).map(p => `<span class="badge platform">${p}</span>`).join('')}
-                        <span class="badge">${skill.category || 'general'}</span>
+                        ${(skill.platforms || []).map(p => `<span class="badge platform" data-platform="${p.toLowerCase()}">${p}</span>`).join('')}
+                        <span class="badge category">${skill.category || 'general'}</span>
                     </div>
                     <h3>${skill.title}</h3>
                     <p>${skill.description}</p>
                     <div class="view-btn">View Skill &rarr;</div>
                 </a>
             `).join('')}
+        </div>
+
+        <div id="empty-state">
+            <h4>No matching skills found</h4>
+            <p>Try searching for a different keyword or platform.</p>
         </div>
     </main>
 
@@ -715,7 +789,7 @@ function generateSkillPage(skill, htmlContent) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     ${getMetaTags(title, skill.description, `${skill.id}.html`)}
     <style>${getBaseStyles()}</style>
@@ -728,22 +802,26 @@ function generateSkillPage(skill, htmlContent) {
 <body>
     <nav>
         <div class="nav-content">
-            <a href="/" class="logo">Agent Skills</a>
+            <a href="/" class="logo">
+                <span class="logo-glyph"></span>
+                <span class="logo-text">Agent Skills</span>
+            </a>
             <div class="nav-links">
-                <button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button>
-                <a href="https://github.com/dhruvanbhalara/skills" target="_blank">GITHUB</a>
+                <button class="theme-btn" onclick="toggleTheme()" id="theme-icon" aria-label="Toggle theme">🌙</button>
+                <a href="https://github.com/dhruvanbhalara/skills" target="_blank" rel="noopener">GITHUB</a>
             </div>
         </div>
     </nav>
 
     <main>
         <div class="breadcrumb">
-            <a href="/">Library</a> / ${skill.title}
+            <a href="/">Library</a> / <span style="text-transform: capitalize;">${skill.category || 'General'}</span> / ${skill.title}
         </div>
 
-        <div style="margin-bottom: 2rem; display: flex; gap: 0.5rem;">
-            ${(skill.platforms || []).map(p => `<span class="badge platform">${p}</span>`).join('')}
-            ${(skill.languages || []).map(l => `<span class="badge">${l}</span>`).join('')}
+        <div style="margin-bottom: 2rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            ${(skill.platforms || []).map(p => `<span class="badge platform" data-platform="${p.toLowerCase()}">${p}</span>`).join('')}
+            ${(skill.languages || []).map(l => `<span class="badge platform" data-platform="${l.toLowerCase()}">${l}</span>`).join('')}
+            <span class="badge category">${skill.category || 'general'}</span>
         </div>
 
         <div class="install-box">
@@ -812,7 +890,8 @@ async function build() {
 
       const skillData = {
         id: folderName,
-        title: (frontmatter.name || folderName).toUpperCase(),
+        name: frontmatter.name || folderName,
+        title: toTitleCase(frontmatter.name || folderName),
         description: frontmatter.description || '',
         platforms: platforms.length > 0 ? platforms : ['flutter'],
         languages: languages.length > 0 ? languages : ['dart'],
