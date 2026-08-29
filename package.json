@@ -1,11 +1,12 @@
 {
   "name": "agent-skills-site",
   "version": "1.0.0",
-  "description": "Premium documentation site for the Agent Skills Library",
+  "description": "Documentation site for the Agent Skills Library",
   "main": "scripts/build_site.js",
   "scripts": {
     "build": "node scripts/build_site.js",
-    "dev": "node scripts/build_site.js --watch"
+    "dev": "node scripts/build_site.js --watch",
+    "validate": "node scripts/validate_skills.js"
   },
   "dependencies": {
     "fs-extra": "^11.2.0",
