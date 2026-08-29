@@ -43,39 +43,43 @@ function toTitleCase(str) {
 
 function getBaseStyles() {
   return `
-    :root {
+    :root, [data-theme="dark"] {
       --color-void: #000000;
       --color-bone-white: #ffffff;
-      --color-ash-gray: #9ca3af;
-      --color-silver-mist: #d1d5db;
+      --color-ash-gray: #94a3b8;
+      --color-silver-mist: #cbd5e1;
       --color-electric-iris: #8052ff;
-      --color-electric-iris-hover: #9266ff;
+      --color-electric-iris-hover: #9366ff;
       --color-electric-iris-glow: rgba(128, 82, 255, 0.28);
       --color-saffron-spark: #ffb829;
       --color-deep-verdant: #10b981;
-      --color-surface-card: rgba(255, 255, 255, 0.025);
-      --color-surface-hover: rgba(255, 255, 255, 0.045);
+      --color-surface-card: rgba(255, 255, 255, 0.03);
+      --color-surface-hover: rgba(255, 255, 255, 0.055);
       --color-border-subtle: rgba(255, 255, 255, 0.09);
       --color-border-hover: rgba(128, 82, 255, 0.45);
-      --color-code-bg: #09090b;
+      --color-code-bg: #09090e;
       --max-width: 1240px;
 
-      --bg: var(--color-void);
-      --text: var(--color-bone-white);
-      --text-muted: var(--color-ash-gray);
-      --text-secondary: var(--color-silver-mist);
-      --primary: var(--color-electric-iris);
-      --primary-hover: var(--color-electric-iris-hover);
-      --primary-glow: var(--color-electric-iris-glow);
-      --card-bg: var(--color-surface-card);
-      --card-hover-bg: var(--color-surface-hover);
-      --border: var(--color-border-subtle);
-      --border-hover: var(--color-border-hover);
-      --nav-bg: rgba(0, 0, 0, 0.75);
-      --code-bg: var(--color-code-bg);
+      --bg: #050508;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-secondary: #cbd5e1;
+      --primary: #8052ff;
+      --primary-hover: #9366ff;
+      --primary-glow: rgba(128, 82, 255, 0.3);
+      --accent-saffron: #ffb829;
+      --accent-verdant: #10b981;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-hover: rgba(128, 82, 255, 0.45);
+      --nav-bg: rgba(5, 5, 8, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-hover-bg: rgba(255, 255, 255, 0.055);
+      --code-bg: #09090e;
       --badge-bg: rgba(255, 255, 255, 0.05);
-      --inline-code-bg: rgba(128, 82, 255, 0.1);
-      --inline-code-color: #a78bfa;
+      --inline-code-bg: rgba(128, 82, 255, 0.12);
+      --inline-code-color: #c4b5fd;
+      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      --card-shadow-hover: 0 14px 34px -8px rgba(128, 82, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.4);
 
       --radius-card: 20px;
       --radius-install: 16px;
@@ -92,23 +96,30 @@ function getBaseStyles() {
       --color-silver-mist: #334155;
       --color-surface-card: #ffffff;
       --color-surface-hover: #ffffff;
-      --color-border-subtle: rgba(0, 0, 0, 0.08);
-      --color-border-hover: rgba(128, 82, 255, 0.4);
-      --color-code-bg: #f1f5f9;
+      --color-border-subtle: #e2e8f0;
+      --color-border-hover: rgba(112, 56, 255, 0.4);
+      --color-code-bg: #0f172a;
 
-      --bg: var(--color-void);
-      --text: var(--color-bone-white);
-      --text-muted: var(--color-ash-gray);
-      --text-secondary: var(--color-silver-mist);
-      --card-bg: var(--color-surface-card);
-      --card-hover-bg: var(--color-surface-hover);
-      --border: var(--color-border-subtle);
-      --border-hover: var(--color-border-hover);
-      --nav-bg: rgba(248, 250, 252, 0.85);
-      --code-bg: var(--color-code-bg);
-      --badge-bg: rgba(0, 0, 0, 0.04);
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-secondary: #334155;
+      --primary: #7038ff;
+      --primary-hover: #5d1ef5;
+      --primary-glow: rgba(112, 56, 255, 0.25);
+      --accent-saffron: #d97706;
+      --accent-verdant: #059669;
+      --border: #e2e8f0;
+      --border-hover: rgba(112, 56, 255, 0.4);
+      --nav-bg: rgba(248, 250, 252, 0.88);
+      --card-bg: #ffffff;
+      --card-hover-bg: #ffffff;
+      --code-bg: #0f172a;
+      --badge-bg: #f1f5f9;
       --inline-code-bg: rgba(112, 56, 255, 0.08);
       --inline-code-color: #6d28d9;
+      --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+      --card-shadow-hover: 0 12px 28px -4px rgba(112, 56, 255, 0.12), 0 4px 8px -2px rgba(0, 0, 0, 0.05);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -156,8 +167,8 @@ function getBaseStyles() {
       letter-spacing: -0.02em;
     }
     .logo-glyph {
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: var(--primary);
       box-shadow: 0 0 10px var(--primary-glow);
@@ -193,7 +204,7 @@ function getBaseStyles() {
 
     /* Hero Section */
     header {
-      padding: 5rem 2rem 3rem;
+      padding: 5rem 2rem 3.5rem;
       max-width: var(--max-width);
       margin: 0 auto;
       width: 100%;
@@ -217,7 +228,7 @@ function getBaseStyles() {
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      color: var(--color-saffron-spark);
+      color: var(--accent-saffron);
       background: rgba(255, 184, 41, 0.08);
       border: 1px solid rgba(255, 184, 41, 0.22);
       padding: 0.35rem 0.9rem;
@@ -228,14 +239,14 @@ function getBaseStyles() {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--color-saffron-spark);
+      background: var(--accent-saffron);
       box-shadow: 0 0 8px rgba(255, 184, 41, 0.5);
     }
     h1 {
-      font-size: clamp(3.2rem, 6.5vw, 5.2rem);
-      font-weight: 500;
+      font-size: clamp(3rem, 6vw, 4.8rem);
+      font-weight: 600;
       letter-spacing: -0.04em;
-      line-height: 1.02;
+      line-height: 1.04;
       margin-bottom: 1.25rem;
       color: var(--text);
     }
@@ -244,7 +255,7 @@ function getBaseStyles() {
       color: var(--text-muted);
       max-width: 540px;
       line-height: 1.6;
-      font-weight: 300;
+      font-weight: 400;
       margin-bottom: 2.25rem;
     }
     .hero-visual {
@@ -265,7 +276,7 @@ function getBaseStyles() {
 
     /* Terminal Install Box */
     .install-box {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius-install);
       padding: 0.75rem 1rem 0.75rem 1.25rem;
@@ -274,11 +285,14 @@ function getBaseStyles() {
       justify-content: space-between;
       gap: 1rem;
       width: 100%;
-      max-width: 580px;
+      max-width: 560px;
       font-family: var(--font-mono);
       font-size: 0.86rem;
       color: var(--text);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      box-shadow: var(--card-shadow);
+    }
+    .skill-page-header .install-box {
+      max-width: 100%;
     }
     [data-theme="light"] .install-box {
       background: #ffffff;
@@ -322,7 +336,7 @@ function getBaseStyles() {
     /* Search & Filter Controls */
     .controls-wrapper {
       max-width: var(--max-width);
-      margin: 0 auto 2.5rem;
+      margin: 0 auto 3rem;
       padding: 0 2rem;
       display: flex;
       flex-direction: column;
@@ -366,6 +380,7 @@ function getBaseStyles() {
       font-family: inherit;
       font-size: 0.95rem;
       outline: none;
+      box-shadow: var(--card-shadow);
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
     #search-input:focus {
@@ -380,9 +395,9 @@ function getBaseStyles() {
       gap: 0.6rem;
     }
     .filter-btn {
-      background: transparent;
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      padding: 0.45rem 1rem;
+      padding: 0.48rem 1.1rem;
       border-radius: var(--radius-pill);
       color: var(--text-muted);
       font-size: 0.78rem;
@@ -396,15 +411,11 @@ function getBaseStyles() {
     .filter-btn .filter-count {
       font-size: 0.7rem;
       font-weight: 600;
-      opacity: 0.7;
+      opacity: 0.75;
     }
     .filter-btn:hover {
-      background: var(--badge-bg);
+      border-color: var(--border-hover);
       color: var(--text);
-      border-color: rgba(255, 255, 255, 0.2);
-    }
-    [data-theme="light"] .filter-btn:hover {
-      border-color: rgba(0, 0, 0, 0.2);
     }
     .filter-btn.active {
       background: var(--primary);
@@ -412,7 +423,7 @@ function getBaseStyles() {
       border-color: var(--primary);
       box-shadow: 0 0 12px var(--primary-glow);
     }
-    .filter-btn.active .filter-count { opacity: 0.9; }
+    .filter-btn.active .filter-count { opacity: 0.95; }
     .filter-btn:active { transform: scale(0.96); }
 
     /* Main & Card Grid */
@@ -426,7 +437,7 @@ function getBaseStyles() {
     .card-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.75rem;
       width: 100%;
     }
     .card {
@@ -440,28 +451,26 @@ function getBaseStyles() {
       flex-direction: column;
       justify-content: space-between;
       position: relative;
+      box-shadow: var(--card-shadow);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    }
-    [data-theme="light"] .card {
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
     }
     .card:hover {
       transform: translateY(-4px);
       border-color: var(--border-hover);
       background: var(--card-hover-bg);
-      box-shadow: 0 14px 34px -10px rgba(128, 82, 255, 0.16);
+      box-shadow: var(--card-shadow-hover);
     }
     .card:active { transform: scale(0.98); }
     .card-header {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.9rem;
       margin-bottom: 1.25rem;
     }
-    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.45rem; }
     .badge {
       font-size: 0.68rem;
-      padding: 0.2rem 0.6rem;
+      padding: 0.22rem 0.62rem;
       border-radius: var(--radius-pill);
       background: var(--badge-bg);
       color: var(--text-muted);
@@ -472,17 +481,17 @@ function getBaseStyles() {
     }
     .badge.platform-flutter {
       border-color: rgba(16, 185, 129, 0.35);
-      color: var(--color-deep-verdant);
+      color: var(--accent-verdant);
       background: rgba(16, 185, 129, 0.08);
     }
     .badge.platform-dart {
       border-color: rgba(128, 82, 255, 0.35);
-      color: var(--color-electric-iris);
+      color: var(--primary);
       background: rgba(128, 82, 255, 0.08);
     }
     .badge.platform-github {
       border-color: rgba(255, 184, 41, 0.35);
-      color: var(--color-saffron-spark);
+      color: var(--accent-saffron);
       background: rgba(255, 184, 41, 0.08);
     }
     .badge.category {
@@ -490,7 +499,7 @@ function getBaseStyles() {
       color: var(--text-muted);
     }
     .card h3 {
-      font-size: 1.15rem;
+      font-size: 1.18rem;
       font-weight: 600;
       letter-spacing: -0.02em;
       line-height: 1.35;
@@ -549,7 +558,7 @@ function getBaseStyles() {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 500;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -557,18 +566,18 @@ function getBaseStyles() {
       color: var(--text-muted);
     }
     .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.15s ease; }
-    .breadcrumb a:hover { color: var(--text); }
+    .breadcrumb a:hover { color: var(--primary); }
     .breadcrumb-sep { opacity: 0.4; }
     .skill-title-block {
       margin-bottom: 2rem;
     }
     .skill-title-block h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
       font-weight: 600;
       letter-spacing: -0.035em;
-      line-height: 1.08;
+      line-height: 1.1;
       color: var(--text);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     /* Markdown Body */
@@ -599,10 +608,30 @@ function getBaseStyles() {
       margin-top: 4rem;
     }
     .markdown-body h3 { font-size: 1.25rem; }
+    .markdown-body a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .markdown-body a:hover {
+      color: var(--primary-hover);
+      text-decoration: underline;
+    }
     .markdown-body p { margin-bottom: 1.6rem; }
     .markdown-body ul, .markdown-body ol { margin-bottom: 1.6rem; padding-left: 1.75rem; }
     .markdown-body li { margin-bottom: 0.6rem; }
     .markdown-body strong { color: var(--text); font-weight: 600; }
+    .markdown-body a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .markdown-body a:hover {
+      color: var(--primary-hover);
+      text-decoration: underline;
+    }
     .markdown-body code:not(pre code) {
       font-family: var(--font-mono);
       font-size: 0.88em;
@@ -612,21 +641,74 @@ function getBaseStyles() {
       color: var(--inline-code-color);
       font-weight: 500;
     }
+
+    /* Code block wrapper and copy button */
+    .code-block-wrapper {
+      position: relative;
+      margin: 2rem 0;
+    }
     .markdown-body pre {
-      background: var(--code-bg) !important;
+      background: #09090e !important;
+      color: #f8fafc;
       padding: 1.75rem;
       border-radius: var(--radius-code);
-      margin: 2rem 0;
+      margin: 0 !important;
       position: relative;
       overflow-x: auto;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    [data-theme="light"] .markdown-body pre {
+      background: #0f172a !important;
+      color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
     .markdown-body pre code {
       font-family: var(--font-mono);
       font-size: 0.88rem;
       line-height: 1.6;
     }
+    .code-block-wrapper .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #ffffff;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.72rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      opacity: 0.9;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+    }
+    .code-block-wrapper:hover .copy-btn {
+      opacity: 1;
+    }
+    .code-block-wrapper .copy-btn:hover {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      opacity: 1;
+    }
+    .code-block-wrapper .copy-btn.copied {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      opacity: 1;
+    }
+    .code-block-wrapper .copy-btn:active {
+      transform: scale(0.95);
+    }
+
     .markdown-body table {
       width: 100%;
       border-collapse: collapse;
@@ -652,33 +734,11 @@ function getBaseStyles() {
       color: var(--text-muted);
     }
 
-    .copy-btn {
-      position: absolute; top: 1rem; right: 1rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.35rem 0.85rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      cursor: pointer;
-      opacity: 0;
-      transition: opacity 0.2s ease, transform 0.15s ease, background 0.15s ease;
-    }
-    [data-theme="light"] .copy-btn {
-      background: rgba(0, 0, 0, 0.06);
-    }
-    pre:hover .copy-btn { opacity: 1; }
-    .copy-btn:hover { background: var(--primary); color: #ffffff; border-color: var(--primary); }
-    .copy-btn:active { transform: scale(0.96); }
-
     /* Footer */
     footer {
       text-align: center;
       padding: 5rem 2rem;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 500;
       color: var(--text-muted);
       border-top: 1px solid var(--border);
@@ -742,7 +802,7 @@ function getThemeScript() {
 
       window.toggleTheme = function() {
         const restore = suppressTransitions();
-        const current = document.documentElement.getAttribute('data-theme');
+        const current = document.documentElement.getAttribute('data-theme') || localStorage.getItem('theme') || 'dark';
         const next = current === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', next);
         applyTheme(next);
@@ -759,24 +819,30 @@ function getThemeScript() {
 
         if (typeof hljs !== 'undefined') hljs.highlightAll();
 
-        // Code block copy buttons
+        // Code block wrapper and copy button
         document.querySelectorAll('pre').forEach(block => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'code-block-wrapper';
+          block.parentNode.insertBefore(wrapper, block);
+          wrapper.appendChild(block);
+
           const button = document.createElement('button');
           button.className = 'copy-btn';
           button.innerText = 'Copy';
+          button.setAttribute('aria-label', 'Copy code block');
           button.addEventListener('click', () => {
             const codeBlock = block.querySelector('code');
             if (!codeBlock) return;
             navigator.clipboard.writeText(codeBlock.innerText).then(() => {
               button.innerText = 'Copied!';
-              button.style.borderColor = 'var(--color-electric-iris)';
+              button.classList.add('copied');
               setTimeout(() => {
                 button.innerText = 'Copy';
-                button.style.borderColor = '';
+                button.classList.remove('copied');
               }, 2000);
             });
           });
-          block.appendChild(button);
+          wrapper.appendChild(button);
         });
 
         // Search & Filter
@@ -848,7 +914,10 @@ function getThemeScript() {
           }
           resize();
 
-          const colors = ['#8052ff', '#ffb829', '#10b981', '#60a5fa', '#f472b6', '#a78bfa'];
+          const colorsDark = ['#8052ff', '#ffb829', '#10b981', '#60a5fa', '#f472b6', '#a78bfa'];
+          const colorsLight = ['#7038ff', '#d97706', '#059669', '#2563eb', '#db2777', '#9333ea'];
+          const isDark = () => (document.documentElement.getAttribute('data-theme') || 'dark') !== 'light';
+
           const particleCount = 42;
           const particles = [];
 
@@ -859,7 +928,7 @@ function getThemeScript() {
               vx: (Math.random() - 0.5) * 0.35,
               vy: (Math.random() - 0.5) * 0.35,
               size: Math.random() * 4.5 + 2.5,
-              color: colors[Math.floor(Math.random() * colors.length)],
+              colorIndex: Math.floor(Math.random() * colorsDark.length),
               angle: Math.random() * Math.PI * 2,
               va: (Math.random() - 0.5) * 0.015
             });
@@ -875,7 +944,7 @@ function getThemeScript() {
             ctx.lineTo(-size * 0.86, size * 0.5);
             ctx.closePath();
             ctx.strokeStyle = color;
-            ctx.lineWidth = 1.3;
+            ctx.lineWidth = 1.4;
             ctx.stroke();
             ctx.restore();
           }
@@ -883,6 +952,8 @@ function getThemeScript() {
           let animId;
           function render() {
             ctx.clearRect(0, 0, width, height);
+            const currentColors = isDark() ? colorsDark : colorsLight;
+            const lineAlpha = isDark() ? 0.22 : 0.18;
 
             // Connect nearby particles with subtle lines
             for (let i = 0; i < particles.length; i++) {
@@ -894,7 +965,8 @@ function getThemeScript() {
                   ctx.beginPath();
                   ctx.moveTo(particles[i].x, particles[i].y);
                   ctx.lineTo(particles[j].x, particles[j].y);
-                  ctx.strokeStyle = 'rgba(128, 82, 255, ' + ((1 - dist / 95) * 0.22) + ')';
+                  const strokeColor = isDark() ? 'rgba(128, 82, 255, ' : 'rgba(112, 56, 255, ';
+                  ctx.strokeStyle = strokeColor + ((1 - dist / 95) * lineAlpha) + ')';
                   ctx.lineWidth = 0.8;
                   ctx.stroke();
                 }
@@ -911,7 +983,7 @@ function getThemeScript() {
               if (p.y < 0) p.y = height;
               if (p.y > height) p.y = 0;
 
-              drawTriangle(p.x, p.y, p.size, p.angle, p.color);
+              drawTriangle(p.x, p.y, p.size, p.angle, currentColors[p.colorIndex]);
             }
             animId = requestAnimationFrame(render);
           }
@@ -968,7 +1040,7 @@ function generateIndexPage(skills) {
     <title>${title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     ${getMetaTags(title, description)}
     <style>${getBaseStyles()}</style>
     <script>${getThemeScript()}</script>
@@ -1100,7 +1172,7 @@ function generateSkillPage(skill, htmlContent) {
     <title>${title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
     ${getMetaTags(title, skill.description, `${skill.id}.html`)}
     <style>${getBaseStyles()}</style>
@@ -1144,7 +1216,7 @@ function generateSkillPage(skill, htmlContent) {
                 <p style="font-size: 1.15rem; color: var(--text-muted); max-width: 720px; line-height: 1.6;">${skill.description}</p>
             </div>
 
-            <div class="install-box" style="max-width: 100%;">
+            <div class="install-box">
                 <div class="install-box-code">
                     <span class="install-box-prompt">$</span>
                     <span class="cmd-text">${installCmd}</span>
