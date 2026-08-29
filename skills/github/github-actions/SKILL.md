@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: Orchestrate CI/CD pipelines with GitHub Actions for Flutter apps. Use when setting up quality gates, automated builds, semantic versioning, code signing, or deployment workflows.
+description: Use when creating or updating GitHub Actions CI/CD workflows for automated testing, static analysis, and artifact deployment.
 metadata:
     platforms: "cross-platform"
     languages: "generic"
@@ -24,7 +24,7 @@ metadata:
   run: flutter test --coverage
 ```
 
--   Zero warnings policy — `--fatal-infos` ensures no info-level issues pass
+-   Zero warnings policy: `--fatal-infos` ensures no info-level issues pass
 -   Format check MUST use `--set-exit-if-changed` to enforce consistent formatting
 
 ## Stage 2: Build
@@ -37,7 +37,7 @@ metadata:
 ```
 
 -   Always build with `--flavor prod` and `--dart-define-from-file=config/prod.json`
--   Use a single `main.dart` — do NOT pass `-t lib/main_prod.dart`
+-   Use a single `main.dart`: do NOT pass `-t lib/main_prod.dart`
 
 ## Stage 3: Deploy (on main merge only)
 
