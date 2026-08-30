@@ -1,11 +1,22 @@
 {
-  "name": "agent-skills-site",
+  "name": "agent-skills",
   "version": "1.0.0",
-  "description": "Documentation site for the Agent Skills Library",
+  "description": "Curated engineering workflows and architectural standards for Dart, Flutter, and GitHub AI coding agents.",
   "main": "scripts/build_site.js",
+  "keywords": [
+    "flutter",
+    "dart",
+    "github-actions",
+    "ai-agents",
+    "antigravity",
+    "cursor",
+    "copilot",
+    "claude-code"
+  ],
   "scripts": {
     "build": "node scripts/build_site.js",
     "dev": "node scripts/build_site.js --watch",
+    "test:site": "node scripts/test_site_build.js",
     "validate": "node scripts/validate_skills.js"
   },
   "dependencies": {
